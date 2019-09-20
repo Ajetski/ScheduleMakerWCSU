@@ -1,3 +1,5 @@
+#include "Utilities.h"
+using std::string;
 
 /* this will only be used if we try to automate finding the indicies of each column we need info from
 bool val_in(unsigned int val, unsigned int list[], unsigned int length) {
@@ -7,4 +9,12 @@ bool val_in(unsigned int val, unsigned int list[], unsigned int length) {
 	return false;
 }*/
 
-
+string startJson() {// to be implemented
+	return "";
+}
+string endJson() {// to be implemented 
+	return "";
+}
+string jsonifyMeeting() {// to be implemented // need to add arguments based on the parsed data
+	return "";
+}

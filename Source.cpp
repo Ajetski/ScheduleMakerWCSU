@@ -56,16 +56,26 @@ int main() {
 		exit(1); // terminate with error
 	}
 
+	
+
 	while (getline(inFile, line)) {
 
+		vector<string> vec;
+
+		// token string into vec
 		size_t found = line.find(",");
 		size_t last = 0;
 		while (found != string::npos) {
-			cout << line.substr(last, found - last) << endl;
+			vec.push_back(line.substr(last, found - last));;
 			last = found + 1;
 			found = line.find(",", found + 1);
 		}
-		cout << endl;
+
+		//print out tokens from this row
+		for (string s : vec) {
+			//here instead of printing, we should parse some data then pass the data into jsonifyMeeting()
+			cout << s << "\n";
+		}
 	}
 	inFile.close();
 
