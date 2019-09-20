@@ -1,4 +1,4 @@
-#define _CRT_SECURE_NO_WARNINGS
+
 #include <iostream>
 #include <iomanip>
 #include <fstream>
@@ -32,10 +32,10 @@ int main() {
 	//(4) time at index 9
 	//(5) instructor at index 18
 
-	string json = "";
+	//make ofstream that holds the json data
 
 	//string startJson();
-	//json += startJson(); //will append the output of startJson to the json string obj
+	//writeresult of startJson() to ofstream that holds json data
 
 	unsigned int indexes[] = { 3, 4, 5, 8, 9, 18 };
 
@@ -52,46 +52,25 @@ int main() {
 	unsigned int row = 0;
 
 	while (getline(inFile, line)) {
-		//line is a string object with the curr line
-		//we need to convert line into a list of string objects via tokening
-		//we will delimit by ','
 
-		
-		unsigned int col = 0;
-		unsigned int curr_idx;
 
-		char* str = new char[line.size()];
-		strcpy(str, line.c_str());
+		char* charPtr = new char[line.size()];
 
-		char* arr = new char[sizeof(indexes)];
-
-		//delimit line by ',' then add values to vector if index is in indexes
-		char* pch;
-		pch = strtok(str, ",");
-
-		while (pch != NULL)
-		{
-			pch = strtok(NULL, ",");
-
-			if (val_in(col, indexes, sizeof(indexes) / sizeof(unsigned int))) {
-				strcpy(arr, pch);
-				cout << pch << "\n";
-			}
-
-			col++;
+		size_t found = line.find(",");
+		size_t last = 0;
+		while (found != string::npos) {
+			cout << line.substr(last, found - last) << endl;
+			last = found + 1;
+			found = line.find(",", found + 1);
 		}
+		cout << endl;
 
-		//string jsonifyMeeting(char* arr, int length_of_arr);
-		//json += jsonifyMeeting(arr, some_int);
-	
-
-		delete[] str; delete[] arr;
 		row++;
 	}
 	inFile.close();
 
 	//string endJson();
-	//json += endJson(); //will append the output of endJson to the json string obj
+	//write result of endJson() to file
 
 	return 0;
 }
