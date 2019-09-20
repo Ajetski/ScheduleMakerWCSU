@@ -21,7 +21,6 @@ string timeJsonify() {//returns the json string from the
 }
 
 string daysJsonify(string days) {//returns the json string given up to 6 letters( MTWRFS) representing Monday through Saturday
-	if(days.length())
 	char* cstrDays = new char[days.size() - 1];
 	strcpy(cstrDays, days.c_str());
 	vector<bool> daysFlags;
@@ -71,6 +70,7 @@ string daysJsonify(string days) {//returns the json string given up to 6 letters
 			}
 		}
 	}
+
 	
 	return "";
 
