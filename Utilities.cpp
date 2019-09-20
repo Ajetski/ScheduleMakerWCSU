@@ -1,4 +1,5 @@
 #include "Utilities.h"
+
 using std::string;
 using std::vector;
 
@@ -20,15 +21,16 @@ string timeJsonify() {//returns the json string from the
 	return string("\"startHour\": ,\n\"endHour\": ,\n\"startMinute\": ,\n\"endMinute\": ,\n");
 }
 
-string daysJsonify(string days) {//returns the json string given up to 6 letters( MTWRFS) representing Monday through Saturday
+string daysJsonify(string days) {
+	//returns the json string given up to 6 letters( MTWRFS) representing Monday through Saturday, or will return an empty string if the class does not meet
+	//NOTE: could be efficiently used to check if a class does not meet
 	char* cstrDays = new char[days.size() - 1];
 	strcpy(cstrDays, days.c_str());
 	vector<bool> daysFlags;
 	string output = "";
-	output.append("\"days\": {\n\"monday\":");
 	int pos = 0;
-	for (int j = 0; j < days.size() - 1;j++) {
-		while (cstrDays != '\0') {
+	for (int j = 0; j < (days.size() - 1);j++) {
+		while (pos < days.size()) {
 			if (cstrDays[j] == 'M') {
 				daysFlags.push_back(true);
 				pos++;
@@ -70,23 +72,18 @@ string daysJsonify(string days) {//returns the json string given up to 6 letters
 			}
 		}
 	}
+	if (pos != 0) {
+		output.append("\"days\": {\n\"monday\": " + daysFlags[0]);
+		output.append(",\n\"tuesday\": " + daysFlags[1]);
+		output.append(",\n\"wednesday\": " + daysFlags[2]);
+		output.append(",\n\"thursday\": " + daysFlags[3]);
+		output.append(",\n\"friday\": " + daysFlags[4]);
+		output.append(",\n\"saturday\": " + daysFlags[5]);
+		output.append(",\n\"sunday\": false\n}\n}\n");
+	}
 
 	
-	return "";
-
-	/*
-	\"days\": {\n
-				\"monday\": true,\n
-				\"tuesday\": false,\n
-				\"wednesday\": false,\n
-				\"thursday\": true,\n
-				\"friday\": false,\n
-				\"saturday\": false,\n
-				\"sunday\": false\n
-
-				}\n
-			}\n
-	*/
+	return output;
 }
 
 /*
@@ -138,6 +135,3 @@ string daysJsonify(string days) {//returns the json string given up to 6 letters
 	}\n
 }\n
 */
-
-
-
