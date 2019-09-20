@@ -68,7 +68,7 @@ int main() {
 		while (found != string::npos) {
 			vec.push_back(line.substr(last, found - last));;
 			last = found + 1;
-			found = line.find(",", found + 1);
+			found = line.find(",", last);
 		}
 
 		//print out tokens from this row
