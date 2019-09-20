@@ -1,4 +1,11 @@
 
+/*
+ScheduleMakerWCSU - Caleb Garrick and Adam Jeniski
+This application will take in a file path to a csv file and a name of a professor.
+It will then save a json file (saved in the form of .csmo)
+which will hold the attributes of that professor's schedule
+*/
+
 #include <iostream>
 #include <iomanip>
 #include <fstream>
