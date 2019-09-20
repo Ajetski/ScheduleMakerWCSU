@@ -21,18 +21,72 @@ string timeJsonify() {//returns the json string from the
 }
 
 string daysJsonify(string days) {//returns the json string given up to 6 letters( MTWRFS) representing Monday through Saturday
+	if(days.length())
 	char* cstrDays = new char[days.size() - 1];
 	strcpy(cstrDays, days.c_str());
-	int mon = 0,
-		tues = 0,
-		wed = 0,
-		thu = 0,
-		fri = 0,
-		sat = 0;
-
-
+	vector<bool> daysFlags;
+	string output = "";
+	output << "\"days\": {\n\"monday\":";
+	int pos = 0;
+	for (char a in cstrDays) {
+		while (a != '\0') {
+			if (a == 'M') {
+				daysFlags.push_back(true);
+				pos++;
+			}
+			else if (a == 'T') {
+				for (i = pos; i < 1; i++) {
+					daysFlag.push_back(false);
+				}
+				daysFlags.push_back(true);
+				pos++;
+			}
+			else if (a == 'W') {
+				for (i = pos; i < 2; i++) {
+					daysFlag.push_back(false);
+				}
+				daysFlags.push_back(true);
+				pos++;
+			}
+			else if (a == 'R') {
+				for (i = pos; i < 3; i++) {
+					daysFlag.push_back(false);
+				}
+				daysFlags.push_back(true);
+				pos++;
+			}
+			else if (a == 'F') {
+				for (i = pos; i < 4; i++) {
+					daysFlag.push_back(false);
+				}
+				daysFlags.push_back(true);
+				pos++;
+			}
+			else if (a == 'S') {
+				for (i = pos; i < 5; i++) {
+					daysFlag.push_back(false);
+				}
+				daysFlags.push_back(true);
+				pos++;
+			}
+		}
+	}
 	
 	return "";
+
+	/*
+	\"days\": {\n
+				\"monday\": true,\n
+				\"tuesday\": false,\n
+				\"wednesday\": false,\n
+				\"thursday\": true,\n
+				\"friday\": false,\n
+				\"saturday\": false,\n
+				\"sunday\": false\n
+
+				}\n
+			}\n
+	*/
 }
 
 /*
