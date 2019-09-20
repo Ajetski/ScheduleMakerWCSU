@@ -72,7 +72,6 @@ int main() {
 		}
 
 		//print out tokens from this row
-		//this is a test to see how github can interface w local files. for Adam's purposes only and should be deleted
 		for (string s : vec) {
 			//here instead of printing, we should parse some data then pass the data into jsonifyMeeting()
 			cout << s << "\n";
