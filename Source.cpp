@@ -49,12 +49,7 @@ int main() {
 		exit(1); // terminate with error
 	}
 
-	unsigned int row = 0;
-
 	while (getline(inFile, line)) {
-
-
-		char* charPtr = new char[line.size()];
 
 		size_t found = line.find(",");
 		size_t last = 0;
@@ -64,8 +59,6 @@ int main() {
 			found = line.find(",", found + 1);
 		}
 		cout << endl;
-
-		row++;
 	}
 	inFile.close();
 
