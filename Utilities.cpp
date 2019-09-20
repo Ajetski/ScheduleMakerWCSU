@@ -27,7 +27,7 @@ string daysJsonify(string days) {//returns the json string given up to 6 letters
 	string output = "";
 	output << "\"days\": {\n\"monday\":";
 	int pos = 0;
-	for (char a in cstrDays) {
+	for (char a : cstrDays) {
 		while (a != '\0') {
 			if (a == 'M') {
 				daysFlags.push_back(true);
