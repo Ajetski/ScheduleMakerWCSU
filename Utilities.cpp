@@ -21,13 +21,35 @@ string timeJsonify() {//returns the json string from the
 }
 
 string daysJsonify(string days) {//returns the json string given up to 6 letters( MTWRFS) representing Monday through Saturday
+	if(days.length())
 	char* cstrDays = new char[days.size() - 1];
 	strcpy(cstrDays, days.c_str());
-	vector<int> daysFlags;
+	vector<bool> daysFlags;
 	string output = "";
 	output << "\"days\": {\n\"monday\":";
+	int pos = 0;
+	for (char a in cstrDays) {
+		while (a != '\0') {
+			if (a == 'M') {
+				
+			}
+			else if (a == 'T') {
 
-	for (int i==0
+			}
+			else if (a == 'W') {
+
+			}
+			else if (a == 'R') {
+
+			}
+			else if (a == 'F') {
+
+			}
+			else if (a == 'S') {
+
+			}
+		}
+	}
 	
 	return "";
 
