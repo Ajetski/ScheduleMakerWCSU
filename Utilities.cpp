@@ -22,17 +22,28 @@ string timeJsonify() {//returns the json string from the
 
 string daysJsonify(string days) {//returns the json string given up to 6 letters( MTWRFS) representing Monday through Saturday
 	char* cstrDays = new char[days.size() - 1];
-	strcpy(cstrDays, day.c_str());
-	int mon = 0,
-		tues = 0,
-		wed = 0,
-		thu = 0,
-		fri = 0,
-		sat = 0;
+	strcpy(cstrDays, days.c_str());
+	vector<int> daysFlags;
+	string output = "";
+	output << "\"days\": {\n\"monday\":";
 
-
+	for (int i==0
 	
 	return "";
+
+	/*
+	\"days\": {\n
+				\"monday\": true,\n
+				\"tuesday\": false,\n
+				\"wednesday\": false,\n
+				\"thursday\": true,\n
+				\"friday\": false,\n
+				\"saturday\": false,\n
+				\"sunday\": false\n
+
+				}\n
+			}\n
+	*/
 }
 
 /*
