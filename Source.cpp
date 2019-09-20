@@ -39,10 +39,12 @@ int main() {
 	//(4) time at index 9
 	//(5) instructor at index 18
 
-	//make ofstream that holds the json data
-
-	//string startJson();
-	//writeresult of startJson() to ofstream that holds json data
+	ofstream json; //a file that holds json data
+	json.open("Schedule.csmo");
+	json << "Writing this to a file.\n";
+	
+	
+	//json << startJson(json)";
 
 	unsigned int indexes[] = { 3, 4, 5, 8, 9, 18 };
 
@@ -63,24 +65,38 @@ int main() {
 		vector<string> vec;
 
 		// token string into vec
-		size_t found = line.find(",");
 		size_t last = 0;
+		size_t found = line.find(",");
+		size_t found_string = line.find("\"", last);
+		
+
+		//still need to solve issue of values potentially being strings with "," inside
 		while (found != string::npos) {
-			vec.push_back(line.substr(last, found - last));;
-			last = found + 1;
-			found = line.find(",", last);
+			if (found_string < found) {
+				// in a string
+			}
+			else {
+				// not in a string
+				vec.push_back(line.substr(last, found - last));;
+				last = found + 1;
+				found = line.find(",", last);
+			}
+			
 		}
 
+		cout << vec.size() << "\n";
+
 		//print out tokens from this row
-		for (string s : vec) {
-			//here instead of printing, we should parse some data then pass the data into jsonifyMeeting()
-			cout << s << "\n";
-		}
+		/*for (size_t i = 0; i < vec.size(); i++) {
+			for (int e : indexes) {
+				if(e == i) cout << vec[i] << "\n";
+			}
+		}*/
 	}
 	inFile.close();
 
-	//string endJson();
-	//write result of endJson() to file
+	json << endJson();
+	json.close();
 
 	return 0;
 }

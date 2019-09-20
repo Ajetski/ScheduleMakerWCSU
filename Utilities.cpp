@@ -1,20 +1,13 @@
 #include "Utilities.h"
 using std::string;
+using std::vector;
 
-/* this will only be used if we try to automate finding the indicies of each column we need info from
-bool val_in(unsigned int val, unsigned int list[], unsigned int length) {
-	for (unsigned int i = 0; i < length; i++) {
-		if (val == list[i]) return true;
-	}
-	return false;
-}*/
-
-string startJson() {// to be implemented
-	return "";
+string startJson() {
+	return string("{\n\"dataCheck\": \"69761aa6-de4c-4013-b455-eb2a91fb2b76\",\n\"saveVersion\" : 4,\n\"schedules\" : [\n{");
 }
-string endJson() {// to be implemented 
-	return "";
+string endJson() {
+	return string("}\n\n],\n\"currentSchedule\": 0\n}");
 }
-string jsonifyMeeting() {// to be implemented // need to add arguments based on the parsed data
+string jsonifyMeeting(vector<string> data) {// to be implemented // need to add arguments based on the parsed data
 	return "";
 }
