@@ -22,7 +22,7 @@ string timeJsonify() {//returns the json string from the
 
 string daysJsonify(string days) {//returns the json string given up to 6 letters( MTWRFS) representing Monday through Saturday
 	char* cstrDays = new char[days.size() - 1];
-	strcpy(cstrDays, day.c_str());
+	strcpy(cstrDays, days.c_str());
 	int mon = 0,
 		tues = 0,
 		wed = 0,
