@@ -25,45 +25,45 @@ string daysJsonify(string days) {//returns the json string given up to 6 letters
 	strcpy(cstrDays, days.c_str());
 	vector<bool> daysFlags;
 	string output = "";
-	output << "\"days\": {\n\"monday\":";
+	output.append("\"days\": {\n\"monday\":");
 	int pos = 0;
-	for (char a : cstrDays) {
-		while (a != '\0') {
-			if (a == 'M') {
+	for (int j = 0; j < days.size() - 1;j++) {
+		while (cstrDays != '\0') {
+			if (cstrDays[j] == 'M') {
 				daysFlags.push_back(true);
 				pos++;
 			}
-			else if (a == 'T') {
-				for (i = pos; i < 1; i++) {
-					daysFlag.push_back(false);
+			else if (cstrDays[j] == 'T') {
+				for (int i = pos; i < 1; i++) {
+					daysFlags.push_back(false);
 				}
 				daysFlags.push_back(true);
 				pos++;
 			}
-			else if (a == 'W') {
-				for (i = pos; i < 2; i++) {
-					daysFlag.push_back(false);
+			else if (cstrDays[j] == 'W') {
+				for (int i = pos; i < 2; i++) {
+					daysFlags.push_back(false);
 				}
 				daysFlags.push_back(true);
 				pos++;
 			}
-			else if (a == 'R') {
-				for (i = pos; i < 3; i++) {
-					daysFlag.push_back(false);
+			else if (cstrDays[j] == 'R') {
+				for (int i = pos; i < 3; i++) {
+					daysFlags.push_back(false);
 				}
 				daysFlags.push_back(true);
 				pos++;
 			}
-			else if (a == 'F') {
-				for (i = pos; i < 4; i++) {
-					daysFlag.push_back(false);
+			else if (cstrDays[j] == 'F') {
+				for (int i = pos; i < 4; i++) {
+					daysFlags.push_back(false);
 				}
 				daysFlags.push_back(true);
 				pos++;
 			}
-			else if (a == 'S') {
-				for (i = pos; i < 5; i++) {
-					daysFlag.push_back(false);
+			else if (cstrDays[j] == 'S') {
+				for (int i = pos; i < 5; i++) {
+					daysFlags.push_back(false);
 				}
 				daysFlags.push_back(true);
 				pos++;
