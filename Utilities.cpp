@@ -20,7 +20,18 @@ string timeJsonify() {//returns the json string from the
 	return string("\"startHour\": ,\n\"endHour\": ,\n\"startMinute\": ,\n\"endMinute\": ,\n");
 }
 
-string daysJsonify() {//returns the json string given up to 6 letters( MTWRFS) representing Monday through Saturday
+string daysJsonify(string days) {//returns the json string given up to 6 letters( MTWRFS) representing Monday through Saturday
+	char* cstrDays = new char[days.size() - 1];
+	strcpy(cstrDays, day.c_str());
+	int mon = 0,
+		tues = 0,
+		wed = 0,
+		thu = 0,
+		fri = 0,
+		sat = 0;
+
+
+	
 	return "";
 }
 
