@@ -10,7 +10,7 @@ string endJson() {
 }
 string jsonifyMeeting(vector<string> data) {// to be implemented // need to add arguments based on the parsed data 
 											// generates a single meeting block to be added to the schedule
-	string title=("")
+	string title = ("");
 	return title;
 }
 
@@ -20,21 +20,8 @@ string timeJsonify() {//returns the json string from the
 	return string("\"startHour\": ,\n\"endHour\": ,\n\"startMinute\": ,\n\"endMinute\": ,\n");
 }
 
-string daysJsonify(string days) {//returns the json string given up to 6 letters( MTWRFS) representing Monday through Saturday
-	char* cstrDays = new char[days.length() - 1];
-	strcpy(cstrDays, days.c_str());
-	int m = 0,
-		t=0,
-		w=0,
-		r=0,
-		f=0,
-		s=0;
-
-
-	for (char a in cstrDays) {
-		if()
-	}
-	return string("\"days\": {\n\"monday\": ,\n\"tuesday\": ,\n\"wednesday\": ,\n\"\": ,\n\"friday\": ,\n\"saturday\": ,\n\"sunday\": false\n}\n}\n");
+string daysJsonify() {//returns the json string given up to 6 letters( MTWRFS) representing Monday through Saturday
+	return "";
 }
 
 /*
