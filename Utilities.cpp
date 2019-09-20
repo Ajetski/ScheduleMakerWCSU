@@ -31,22 +31,49 @@ string daysJsonify(string days) {//returns the json string given up to 6 letters
 	for (char a in cstrDays) {
 		while (a != '\0') {
 			if (a == 'M') {
-				
+				daysFlags.push_back(true);
+				pos++;
+				break;
 			}
 			else if (a == 'T') {
-
+				for (i = pos; i < 1; i++) {
+					daysFlag.push_back(false);
+				}
+				daysFlags.push_back(true);
+				pos++;
+				break;
 			}
 			else if (a == 'W') {
-
+				for (i = pos; i < 2; i++) {
+					daysFlag.push_back(false);
+				}
+				daysFlags.push_back(true);
+				pos++;
+				break;
 			}
 			else if (a == 'R') {
-
+				for (i = pos; i < 3; i++) {
+					daysFlag.push_back(false);
+				}
+				daysFlags.push_back(true);
+				pos++;
+				break;
 			}
 			else if (a == 'F') {
-
+				for (i = pos; i < 4; i++) {
+					daysFlag.push_back(false);
+				}
+				daysFlags.push_back(true);
+				pos++;
+				break;
 			}
 			else if (a == 'S') {
-
+				for (i = pos; i < 5; i++) {
+					daysFlag.push_back(false);
+				}
+				daysFlags.push_back(true);
+				pos++;
+				break;
 			}
 		}
 	}
