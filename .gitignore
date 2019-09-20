@@ -4,5 +4,5 @@ An optional prefix ! which negates the pattern; any matching file excluded by a 
 *.user
 *.vcxproj
 *.sln
-/.vs/*
+/Debug/*
 *.filters
