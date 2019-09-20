@@ -71,13 +71,15 @@ int main() {
 		
 
 		//still need to solve issue of values potentially being strings with "," inside
-		while (found != string::npos) {
+		for (unsigned int i = 0; found != string::npos; i++) {
 			if (found_string < found) {
-				// in a string
+				found = line.find("\"", found_string + 1);
 			}
 			else {
 				// not in a string
-				vec.push_back(line.substr(last, found - last));;
+				if (i == 3 || i == 4 || i == 5 || i == 8 || i == 9 || i == 18) {
+					vec.push_back(line.substr(last, found - last));;
+				}
 				last = found + 1;
 				found = line.find(",", last);
 			}
@@ -87,11 +89,9 @@ int main() {
 		cout << vec.size() << "\n";
 
 		//print out tokens from this row
-		/*for (size_t i = 0; i < vec.size(); i++) {
-			for (int e : indexes) {
-				if(e == i) cout << vec[i] << "\n";
-			}
-		}*/
+		for (size_t i = 0; i < vec.size(); i++) {
+			cout << vec[i] << endl;
+		}
 	}
 	inFile.close();
 
