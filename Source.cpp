@@ -29,15 +29,17 @@ using namespace std;
 int main() {
 
 	//get csv vals
+	
 	//19 columns
-	//time is in format hh:mm am/pm-hh:mm am/pm
 
+	//Index mapping
 	//(0) subject at index 3
 	//(1) course at index 4
 	//(2) section at index 5
 	//(3) days at index 8
 	//(4) time at index 9
-	//(5) instructor at index 18
+	//(5) location at index 17
+	//(6) instructor at index 18
 
 	ofstream json; //a file that holds json data
 	json.open("output.csmo");
@@ -46,7 +48,7 @@ int main() {
 	
 	//json << startJson(json)";
 
-	unsigned int indexes[] = { 3, 4, 5, 8, 9, 18 };
+	unsigned int indexes[] = { 3, 4, 5, 8, 9, 17, 18 };
 
 	string line;
 
@@ -77,7 +79,7 @@ int main() {
 			}
 			else {
 				// not in a string
-				if (i == 3 || i == 4 || i == 5 || i == 8 || i == 9 || i == 18) {
+				if (i == 3 || i == 4 || i == 5 || i == 8 || i == 9 || i==17 || i == 18) {
 					vec.push_back(line.substr(last, found - last));;
 				}
 				last = found + 1;
