@@ -40,7 +40,7 @@ int main() {
 	//(5) instructor at index 18
 
 	ofstream json; //a file that holds json data
-	json.open("Schedule.csmo");
+	json.open("output.csmo");
 	json << "Writing this to a file.\n";
 	
 	
