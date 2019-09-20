@@ -10,7 +10,7 @@ string endJson() {
 }
 string jsonifyMeeting(vector<string> data) {// to be implemented // need to add arguments based on the parsed data 
 											// generates a single meeting block to be added to the schedule
-	string title=("")
+	string title = ("");
 	return title;
 }
 
@@ -21,7 +21,7 @@ string timeJsonify() {//returns the json string from the
 }
 
 string daysJsonify() {//returns the json string given up to 6 letters( MTWRFS) representing Monday through Saturday
-
+	return "";
 }
 
 /*
