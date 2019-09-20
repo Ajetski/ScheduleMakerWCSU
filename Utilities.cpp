@@ -33,7 +33,6 @@ string daysJsonify(string days) {//returns the json string given up to 6 letters
 			if (a == 'M') {
 				daysFlags.push_back(true);
 				pos++;
-				break;
 			}
 			else if (a == 'T') {
 				for (i = pos; i < 1; i++) {
@@ -41,7 +40,6 @@ string daysJsonify(string days) {//returns the json string given up to 6 letters
 				}
 				daysFlags.push_back(true);
 				pos++;
-				break;
 			}
 			else if (a == 'W') {
 				for (i = pos; i < 2; i++) {
@@ -49,7 +47,6 @@ string daysJsonify(string days) {//returns the json string given up to 6 letters
 				}
 				daysFlags.push_back(true);
 				pos++;
-				break;
 			}
 			else if (a == 'R') {
 				for (i = pos; i < 3; i++) {
@@ -57,7 +54,6 @@ string daysJsonify(string days) {//returns the json string given up to 6 letters
 				}
 				daysFlags.push_back(true);
 				pos++;
-				break;
 			}
 			else if (a == 'F') {
 				for (i = pos; i < 4; i++) {
@@ -65,7 +61,6 @@ string daysJsonify(string days) {//returns the json string given up to 6 letters
 				}
 				daysFlags.push_back(true);
 				pos++;
-				break;
 			}
 			else if (a == 'S') {
 				for (i = pos; i < 5; i++) {
@@ -73,7 +68,6 @@ string daysJsonify(string days) {//returns the json string given up to 6 letters
 				}
 				daysFlags.push_back(true);
 				pos++;
-				break;
 			}
 		}
 	}
