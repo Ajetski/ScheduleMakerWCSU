@@ -6,4 +6,5 @@ using std::vector;
 
 string startJson();
 string endJson();
+string daysJsonify(string weekdays);
 string jsonifyMeeting(vector<string> data);
