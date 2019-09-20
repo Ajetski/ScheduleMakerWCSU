@@ -10,7 +10,7 @@ string endJson() {
 }
 string jsonifyMeeting(vector<string> data) {// to be implemented // need to add arguments based on the parsed data 
 											// generates a single meeting block to be added to the schedule
-	string title = ("");
+	string title=("")
 	return title;
 }
 
