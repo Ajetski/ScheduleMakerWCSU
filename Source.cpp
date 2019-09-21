@@ -93,22 +93,24 @@ int main() {
 		for (size_t i = 0; found != string::npos; i++) {
 			if (start_quote < found) {
 				size_t end_quote = line.find("\"", start_quote + 1);
+				string temp = line.substr(start_quote + 1, end_quote - 1);
 				if (curr != indexes.end() && i == *curr) {
 					vec.push_back(line.substr(start_quote + 1, end_quote - 1));
 					curr++;
 				}
 				last = end_quote + 1;
 				start_quote = line.find("\"", end_quote + 1);
-				found = line.find(",", last);
+				found = line.find(",", last + 1);
 			}			
 			else {
 				// not in a string
+				string temp = line.substr(last, found - last + 1);
 				if (curr != indexes.end() && i == *curr) {
 					vec.push_back(line.substr(last, found - last + 1));
 					curr++;
 				}
 				last = found + 1;
-				found = line.find(",", last);
+				found = line.find(",", last + 1);
 			}
 		}
 
