@@ -77,17 +77,17 @@ int main() {
 		for (unsigned int i = 0; found != string::npos; i++) {
 			if (found_string > found) {
 				found = line.find("\"", found_string + 1);
-				if (i == 3 || i == 4 || i == 5 || i == 8 || i == 9 || i == 17 || i == 18) {
+				//if (i == 3 || i == 4 || i == 5 || i == 8 || i == 9 || i == 17 || i == 18) {
 					vec.push_back(line.substr(found_string, found - found_string));
-				}
+				//}
 				last = found + 1;
 				found = line.find(",", last);
 			}
 			else {
 				// not in a string
-				if (i == 3 || i == 4 || i == 5 || i == 8 || i == 9 || i==17 || i == 18) {
+				//if (i == 3 || i == 4 || i == 5 || i == 8 || i == 9 || i==17 || i == 18) {
 					vec.push_back(line.substr(last, found - last));
-				}
+				//}
 				last = found + 1;
 				found = line.find(",", last);
 			}
