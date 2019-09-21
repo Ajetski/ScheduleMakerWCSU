@@ -25,53 +25,22 @@ string timeJsonify() {//returns the json string from the
 string daysJsonify(string days) {
 	//returns the json string given up to 6 letters( MTWRFS) representing Monday through Saturday, or will return an empty string if the class does not meet
 	//NOTE: could be efficiently used to check if a class does not meet
-	vector<char> dayVals = { 'M','T','W','R','F','S' };
+	vector<size_t> dayVals{'M','T','W','R','F','S' };
+	vector<size_t>::iterator iter = dayVals.begin();
 	vector<string> daysFlags;
 	string output = "";
 	int pos = 0;
 	// 1 for loop that goes through each char in list. if current char is equal to the curr iterator from dayVals,
 	// push true, else push false; at end of loop inc iterator
-	for (int j = 0; j < (days.length() - 1);j++) {
-		while (pos < days.length()) {
-			if (days[j] == 'M') {
-				daysFlags.push_back("true");
-				pos++;
-			}
-			else if (days[j] == 'T') {
-				for (int i = pos; i < 1; i++) {
-					daysFlags.push_back("false");
-				}
-				daysFlags.push_back("true");
-				pos++;
-			}
-			else if (days[j] == 'W') {
-				for (int i = pos; i < 2; i++) {
-					daysFlags.push_back("false");
-				}
-				daysFlags.push_back("true");
-				pos++;
-			}
-			else if (days[j] == 'R') {
-				for (int i = pos; i < 3; i++) {
-					daysFlags.push_back("false");
-				}
-				daysFlags.push_back("true");
-				pos++;
-			}
-			else if (days[j] == 'F') {
-				for (int i = pos; i < 4; i++) {
-					daysFlags.push_back("false");
-				}
-				daysFlags.push_back("true");
-				pos++;
-			}
-			else if (days[j] == 'S') {
-				for (int i = pos; i < 5; i++) {
-					daysFlags.push_back("false");
-				}
-				daysFlags.push_back("true");
-				pos++;
-			}
+	while(iter!=dayVals.end()) {
+		if (days[pos] == *iter) {
+			daysFlags.push_back("true");
+			pos++;
+			iter++;
+		}
+		else {
+			daysFlags.push_back("false");
+			iter++;
 		}
 	}
 	if (pos != 0) {
