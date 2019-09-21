@@ -94,7 +94,7 @@ int main() {
 			if (start_quote < found) {
 				size_t end_quote = line.find("\"", start_quote + 1);
 				if (curr != indexes.end() && i == *curr) {
-					vec.push_back(line.substr(start_quote, end_quote + 1));
+					vec.push_back(line.substr(start_quote + 1, end_quote - 1));
 					curr++;
 				}
 				last = end_quote + 1;

@@ -29,6 +29,8 @@ string daysJsonify(string days) {
 	vector<string> daysFlags;
 	string output = "";
 	int pos = 0;
+	// 1 for loop that goes through each char in list. if current char is equal to the curr iterator from dayVals,
+	// inc iterator and push true, else push false
 	for (int j = 0; j < (days.length() - 1);j++) {
 		while (pos < days.length()) {
 			if (days[j] == 'M') {
