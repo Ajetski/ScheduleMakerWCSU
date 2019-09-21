@@ -32,23 +32,23 @@ string daysJsonify(string days) {
 	//returns the json string given up to 6 letters( MTWRFS) representing Monday through Saturday, or will return an empty string if the class does not meet
 	//NOTE: could be efficiently used to check if a class does not meet
 	vector<char> dayVals{'M','T','W','R','F','S' };
-	vector<char>::iterator iter = dayVals.begin();
+	vector<char>::iterator dayCharsIter = dayVals.begin();
 	vector<string> daysFlags;
 	string output = "";
-	int pos = 0;
+	string::iterator daysStringIter = days.begin();
 	// 1 for loop that goes through each char in list. if current char is equal to the curr iterator from dayVals,
 	// push true, else push false; at end of loop inc iterator
 	for (char weekDay : dayVals) {
-		if (days[pos] == *iter) {
+		if (*daysStringIter == *dayCharsIter) {
 			daysFlags.push_back("true");
-			pos++;
+			daysStringIter++;
 		}
 		else {
 			daysFlags.push_back("false");
 		}
-		iter++;
+		dayCharsIter++;
 	}
-	if (pos != 0) {
+	if (daysStringIter != days.begin()) {
 		output.append("\"days\": {\n\"monday\": " + daysFlags[0] +
 			",\n\"tuesday\": " + daysFlags[1] +
 			",\n\"wednesday\": " + daysFlags[2] +
