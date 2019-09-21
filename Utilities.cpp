@@ -25,8 +25,8 @@ string timeJsonify() {//returns the json string from the
 string daysJsonify(string days) {
 	//returns the json string given up to 6 letters( MTWRFS) representing Monday through Saturday, or will return an empty string if the class does not meet
 	//NOTE: could be efficiently used to check if a class does not meet
-	vector<size_t> dayVals{'M','T','W','R','F','S' };
-	vector<size_t>::iterator iter = dayVals.begin();
+	vector<char> dayVals{'M','T','W','R','F','S' };
+	vector<char>::iterator iter = dayVals.begin();
 	vector<string> daysFlags;
 	string output = "";
 	int pos = 0;
