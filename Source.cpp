@@ -140,6 +140,8 @@ int main() {
 	//json << endJson();
 	json.close();
 
+	cout << daysJsonify("MWF");
+
 	return 0;
 }
 

@@ -39,7 +39,7 @@ string daysJsonify(string days) {
 	// 1 for loop that goes through each char in list. if current char is equal to the curr iterator from dayVals,
 	// push true, else push false; at end of loop inc iterator
 	for (char weekDay : dayVals) {
-		if (weekDay == *iter) {
+		if (days[pos] == *iter) {
 			daysFlags.push_back("true");
 			pos++;
 		}
@@ -103,6 +103,7 @@ string daysJsonify(string days) {
 
 
 	This chunk is generated after all meeting times for a course are read
+	will be generated in colorJsonify
 
 		],\n
 		\"backgroundColor\": \"#FFE37D\"\n
