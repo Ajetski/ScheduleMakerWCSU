@@ -39,7 +39,7 @@ string daysJsonify(string days) {
 	// 1 for loop that goes through each char in list. if current char is equal to the curr iterator from dayVals,
 	// push true, else push false; at end of loop inc iterator
 	for (char weekDay : dayVals) {
-		if (*daysStringIter == *dayCharsIter) {
+		if (daysStringIter != days.end() && dayCharsIter != dayVals.end() && *daysStringIter == *dayCharsIter) {
 			daysFlags.push_back("true");
 			daysStringIter++;
 		}
