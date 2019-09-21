@@ -68,8 +68,8 @@ int main() {
 	string line;
 
 	ifstream inFile;
-	//inFile.open("Fall2019OpenClose.csv");
-	inFile.open("test.csv");
+	inFile.open("Fall2019OpenClose.csv");
+	//inFile.open("test.csv");
 
 	if (!inFile.is_open()) {
 		cout << "Unable to open file";
