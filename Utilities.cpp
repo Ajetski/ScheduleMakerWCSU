@@ -16,16 +16,28 @@ string jsonifyMeeting(vector<string> data) {// to be implemented // need to add 
 	return title;
 }
 
-string timeJsonify(string time) {//returns the json string from from a given time 
+string timeJsonify(string time) {
+	//returns the json string from from a given time in format hh:mm am/pm-hh:mm am/pm (ignores preceding characters
+	//also converts from 12 hr to 24 hr time
 	string meetingTime = "";
-	size_t colon = time.find(':');
-	size_t firstTime = time.find('-');
-	size_t secondTime = time.find('-', firstTime + 1);
 	if (time.length()) {
-		meetingTime.append("\"startHour\": " + time.substr(0,2) +
-			",\n\"endHour\": " + time.substr(colon+1,2) +
-			",\n\"startMinute\": " + time.substr(firstTime+1,2) +
-			",\n\"endMinute\": " + time.substr(secondTime+1,2) +
+		size_t div = time.find('-');
+		string strtTime = time.substr(time.find(':')-2, div);
+		string finTime = time.substr(div + 1);
+		string strtHr = strtTime.substr(0, strtTime.find(':'));
+		string finHr = finTime.substr(0,finTime.find(':'));
+
+		if (strtTime.find("pm")!=string::npos) {
+			strtHr = std::to_string(12 + stoi(strtTime.substr(0, 2)));
+		}
+		if (finTime.find("pm")!=string::npos) {
+			finHr = std::to_string(12 + stoi(finTime.substr(0, 2)));
+		}
+
+		meetingTime.append("\"startHour\": " + strtHr +
+			",\n\"endHour\": " + finHr +
+			",\n\"startMinute\": " + strtTime.substr(strtTime.find(':')+1,2) +
+			",\n\"endMinute\": " + finTime.substr(finTime.find(':') + 1, 2) +
 			",\n");
 	}
 	

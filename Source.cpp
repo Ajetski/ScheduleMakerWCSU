@@ -140,7 +140,8 @@ int main() {
 	//json << endJson();
 	json.close();
 
-	cout << daysJsonify("MWF");
+	//cout << daysJsonify("MWF");
+	cout << timeJsonify("05:30 am-08:30 pm");
 
 	return 0;
 }
