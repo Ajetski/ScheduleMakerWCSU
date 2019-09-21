@@ -58,17 +58,17 @@ int main() {
 	json.open("output.csmo");
 	
 	
-	//json << startJson(json)";
+	//json << startJson();
 
-	//vector<size_t> indexes{ 3, 4, 5, 8, 9, 17, 18 };
-	vector<size_t> indexes{ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19};
+	vector<size_t> indexes{ 3, 4, 5, 8, 9, 17, 18 };
+	//vector<size_t> indexes{ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19};
 	
 
 	string line;
 
 	ifstream inFile;
-	//inFile.open("Fall2019OpenClose.csv");
-	inFile.open("test.csv");
+	inFile.open("Fall2019OpenClose.csv");
+	//inFile.open("test.csv");
 
 	if (!inFile.is_open()) {
 		cout << "Unable to open file";
@@ -131,7 +131,7 @@ int main() {
 
 		//print out tokens from this row
 		for (vector<string>::iterator i = vec.begin(); i != vec.end(); i++) {
-			cout << *i << "\n";
+			cout << *i << "\t";
 		}
 		cout << endl;
 	}
