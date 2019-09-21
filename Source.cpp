@@ -4,7 +4,20 @@ ScheduleMakerWCSU - Caleb Garrick and Adam Jeniski
 This application will take in a file path to a csv file and a name of a professor.
 It will then save a json file (saved in the form of .csmo)
 which will hold the attributes of that professor's schedule
+
+Edge Cases:
+
+	-Online classes are represented without a meeting day only, time=TBA, location=ONLINE
+
+
+	-Classes which don't meet on a weekly basis
+		Row in csv for each day of meeting
+		represeted without a subject, course, or section
+
+	-Classes meeting at different times during different days of the week
+		We may get the profname and class time, but without classname we must look up until we find a name to pull
 */
+
 
 #include <iostream>
 #include <iomanip>
@@ -70,36 +83,44 @@ int main() {
 		// token string into vec
 		size_t last = 0;
 		size_t found = line.find(",");
-		size_t found_string = line.find("\"", last);
+		size_t found_string_open = line.find("\"", last);
+		size_t found_string_close= line.find("\"",found_string_open+1);
 		
 
 		//still need to solve issue of values potentially being strings with "," inside
 		for (unsigned int i = 0; found != string::npos; i++) {
-			if (found_string > found) {
-				found = line.find("\"", found_string + 1);
-				//if (i == 3 || i == 4 || i == 5 || i == 8 || i == 9 || i == 17 || i == 18) {
-					vec.push_back(line.substr(found_string, found - found_string));
-				//}
-				last = found + 1;
+			if (found_string_open < found && found < found_string_close) {
+				//checks if we found a comma within a string rather than separating columns
+				if (i == 3 || i == 4 || i == 5 || i == 8 || i == 9 || i == 17 || i == 18) {
+					vec.push_back(line.substr(found_string_open+1,(found_string_close-found_string_open)-1));
+				}
+				last = found_string_close + 1;
 				found = line.find(",", last);
 			}
-			else {
-				// not in a string
-				//if (i == 3 || i == 4 || i == 5 || i == 8 || i == 9 || i==17 || i == 18) {
-					vec.push_back(line.substr(last, found - last));
-				//}
+			else if (line.find(",", found + 1) == string::npos) {
+				//checks if we're looking at the final column
+				vec.push_back(line.substr(last, found-line.find("\n")));
+				found = line.find(",", found + 1);
 				last = found + 1;
-				found = line.find(",", last);
 			}
 			
+			else {
+				// not in a string
+				if (i == 3 || i == 4 || i == 5 || i == 8 || i == 9 || i == 17 || i == 18){
+					vec.push_back(line.substr(last, found - last));
+				}
+				last =found + 1;
+				found = line.find(",", last);
+			}
 		}
 
-		cout << vec.size() << "\n";
+		cout << vec.size() << "\t";
 
 		//print out tokens from this row
 		for (size_t i = 0; i < vec.size(); i++) {
-			cout << vec[i] << endl;
+			cout << vec[i] << "\t\t";
 		}
+		cout << endl;
 	}
 	inFile.close();
 
