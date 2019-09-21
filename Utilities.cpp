@@ -40,6 +40,7 @@ string daysJsonify(string days) {
 		else {
 			daysFlags.push_back("false");
 		}
+		iter++;
 	}
 	if (pos != 0) {
 		output.append("\"days\": {\n\"monday\": " + daysFlags[0] +
