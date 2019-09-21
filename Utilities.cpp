@@ -1,5 +1,3 @@
-#define _CRT_SECURE_NO_WARNINGS
-
 #include "Utilities.h"
 
 
@@ -27,46 +25,44 @@ string timeJsonify() {//returns the json string from the
 string daysJsonify(string days) {
 	//returns the json string given up to 6 letters( MTWRFS) representing Monday through Saturday, or will return an empty string if the class does not meet
 	//NOTE: could be efficiently used to check if a class does not meet
-	char* cstrDays = new char[days.size() - 1];
-	strcpy(cstrDays, days.c_str());
 	vector<bool> daysFlags;
 	string output = "";
 	int pos = 0;
 	for (int j = 0; j < (days.size() - 1);j++) {
 		while (pos < days.size()) {
-			if (cstrDays[j] == 'M') {
+			if (days[j] == 'M') {
 				daysFlags.push_back(true);
 				pos++;
 			}
-			else if (cstrDays[j] == 'T') {
+			else if (days[j] == 'T') {
 				for (int i = pos; i < 1; i++) {
 					daysFlags.push_back(false);
 				}
 				daysFlags.push_back(true);
 				pos++;
 			}
-			else if (cstrDays[j] == 'W') {
+			else if (days[j] == 'W') {
 				for (int i = pos; i < 2; i++) {
 					daysFlags.push_back(false);
 				}
 				daysFlags.push_back(true);
 				pos++;
 			}
-			else if (cstrDays[j] == 'R') {
+			else if (days[j] == 'R') {
 				for (int i = pos; i < 3; i++) {
 					daysFlags.push_back(false);
 				}
 				daysFlags.push_back(true);
 				pos++;
 			}
-			else if (cstrDays[j] == 'F') {
+			else if (days[j] == 'F') {
 				for (int i = pos; i < 4; i++) {
 					daysFlags.push_back(false);
 				}
 				daysFlags.push_back(true);
 				pos++;
 			}
-			else if (cstrDays[j] == 'S') {
+			else if (days[j] == 'S') {
 				for (int i = pos; i < 5; i++) {
 					daysFlags.push_back(false);
 				}
