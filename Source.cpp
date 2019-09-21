@@ -56,7 +56,6 @@ int main() {
 
 	ofstream json; //a file that holds json data
 	json.open("output.csmo");
-	json << "Writing this to a file.\n";
 	
 	
 	//json << startJson(json)";
@@ -89,9 +88,13 @@ int main() {
 		size_t start_quote = line.find("\"", last);
 		
 
-		//still need to solve issue of values potentially being strings with "," inside
-		for (size_t i = 0; found != string::npos; i++) {
-			if (start_quote < found) {
+		bool reached_end = false;
+		for (size_t i = 0; found != string::npos || ! reached_end; i++) {
+			if (found == string::npos && last != string::npos) {
+				vec.push_back(line.substr(last, line.size() - last));
+				reached_end = true;
+			}
+			else if (start_quote < found) {
 				size_t end_quote = line.find("\"", start_quote + 1);
 				string temp = line.substr(start_quote + 1, end_quote - start_quote - 1);
 				if (curr != indexes.end() && i == *curr) {
@@ -101,7 +104,7 @@ int main() {
 				last = end_quote + 1;
 				start_quote = line.find("\"", end_quote + 1);
 				found = line.find(",", last + 1);
-			}			
+			}
 			else {
 				// not in a string
 				string temp = line.substr(last, found - last);
@@ -124,7 +127,7 @@ int main() {
 	}
 	inFile.close();
 
-	json << endJson();
+	//json << endJson();
 	json.close();
 
 	return 0;
