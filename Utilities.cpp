@@ -1,5 +1,7 @@
-#include "Utilities.h"
 #define _CRT_SECURE_NO_WARNINGS
+
+#include "Utilities.h"
+
 
 using std::string;
 using std::vector;
