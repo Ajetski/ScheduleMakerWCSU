@@ -7,12 +7,30 @@ using std::vector;
 string startJson() {
 	return string("{\n\"dataCheck\": \"69761aa6-de4c-4013-b455-eb2a91fb2b76\",\n\"saveVersion\" : 4,\n\"schedules\" : [\n");
 }
+
 string endJson() {
 	return string("\n\n],\n\"currentSchedule\": 0\n}");
 }
-string jsonifyMeeting(vector<string> data) {// to be implemented // need to add arguments based on the parsed data 
-											// generates a single meeting block to be added to the schedule
-	string title = ("temp");
+
+//Index mapping
+	//(0) subject at index 3
+	//(1) course at index 4
+	//(2) section at index 5
+	//(3) days at index 8
+	//(4) time at index 9
+	//(5) location at index 17
+	//(6) instructor at index 18
+
+string jsonifyMeeting(vector<string> data, string prof) {// generates a single meeting block to be added to the schedule
+	//unfinished.
+	//Plan:
+	//goto source.cpp and add conditionals chekcing if my curr vector is worth parsing. (is it the correct prof)?
+	//finish making this funciton generate the json data from data
+	size_t found = data[6].find(prof);
+	if (found == string::npos) {
+		return string("");
+	}
+	string title = (prof + "'s Schedule");
 	return title;
 }
 
@@ -52,7 +70,7 @@ string timeJsonify(string time) {
 }
 
 
-string daysJsonify(string input) { //adams playground
+string daysJsonify(string input) {
 	string output("");
 	vector<string> days{"M", "T", "W", "R", "F", "S"};
 	vector<string> format{ "\"days\": {\n\"monday\": ", ",\n\"tuesday\": ", ",\n\"wednesday\": ",
