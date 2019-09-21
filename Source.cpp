@@ -99,7 +99,8 @@ int main() {
 				}
 				else {
 					//there are quotes
-
+					size_t end_quote = temp.find("\"", start_quote + 1);
+					vec.push_back(temp.substr(start_quote + 1, end_quote - start_quote - 1));
 				}
 				reached_end = true;
 			}
