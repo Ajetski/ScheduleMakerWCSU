@@ -16,10 +16,16 @@ string jsonifyMeeting(vector<string> data) {// to be implemented // need to add 
 	return title;
 }
 
-//Assumption: we don't need to worry about whether class is full semester or not
-
 string timeJsonify() {//returns the json string from the 
-	return string("\"startHour\": ,\n\"endHour\": ,\n\"startMinute\": ,\n\"endMinute\": ,\n");
+	string meetingTime = "";
+
+	return meetingTime;
+	/*
+		\"startHour\": ,\n
+		\"endHour\": ,\n
+		\"startMinute\": ,\n
+		\"endMinute\": ,\n		
+	*/
 }
 
 string daysJsonify(string days) {
@@ -75,9 +81,7 @@ string daysJsonify(string days) {
 			{\n
 				\"uid\": \"866e9185-4a29-47ae-a4b0-0423e633c8be\",\n
 				\"courseType\": \"\",\n
-
 				\"instructor\": \"\",\n
-
 				\"location\": \"\",\n
 
 				\"startHour\": ,\n
