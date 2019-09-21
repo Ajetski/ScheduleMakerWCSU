@@ -16,8 +16,18 @@ string jsonifyMeeting(vector<string> data) {// to be implemented // need to add 
 	return title;
 }
 
-string timeJsonify(string time) {//returns the json string from the 
+string timeJsonify(string time) {//returns the json string from from a given time 
 	string meetingTime = "";
+	size_t colon = time.find(':');
+	size_t firstTime = time.find('-');
+	size_t secondTime = time.find('-', firstTime + 1);
+	if (time.length()) {
+		meetingTime.append("\"startHour\": " + time.substr(0,2) +
+			",\n\"endHour\": " + time.substr(colon+1,2) +
+			",\n\"startMinute\": " + time.substr(firstTime+1,2) +
+			",\n\"endMinute\": " + time.substr(secondTime+1,2) +
+			",\n");
+	}
 	
 
 	return meetingTime;
