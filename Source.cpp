@@ -91,7 +91,16 @@ int main() {
 		bool reached_end = false;
 		for (size_t i = 0; found != string::npos || ! reached_end; i++) {
 			if (found == string::npos && last != string::npos) {
-				vec.push_back(line.substr(last, line.size() - last));
+				string temp = line.substr(last, line.size() - last);
+				start_quote = temp.find("\"");
+				if (start_quote == string::npos) {
+					//there no quotes
+					vec.push_back(temp);
+				}
+				else {
+					//there are quotes
+
+				}
 				reached_end = true;
 			}
 			else if (start_quote < found) {

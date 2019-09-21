@@ -38,8 +38,8 @@ string daysJsonify(string days) {
 	int pos = 0;
 	// 1 for loop that goes through each char in list. if current char is equal to the curr iterator from dayVals,
 	// push true, else push false; at end of loop inc iterator
-	for (string::iterator weekDay = days.begin(); weekDay != days.end() && iter != dayVals.end(); weekDay++) {
-		if (*weekDay == *iter) {
+	for (char weekDay : dayVals) {
+		if (weekDay == *iter) {
 			daysFlags.push_back("true");
 			pos++;
 		}
