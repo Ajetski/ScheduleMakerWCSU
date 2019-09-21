@@ -16,8 +16,9 @@ string jsonifyMeeting(vector<string> data) {// to be implemented // need to add 
 	return title;
 }
 
-string timeJsonify() {//returns the json string from the 
+string timeJsonify(string time) {//returns the json string from the 
 	string meetingTime = "";
+	
 
 	return meetingTime;
 	/*
