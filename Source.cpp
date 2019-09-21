@@ -91,20 +91,17 @@ int main() {
 		bool reached_end = false;
 		for (size_t i = 0; found != string::npos || ! reached_end; i++) {
 			if (found == string::npos && last != string::npos) {
+				//handle last cell in a line
 				string temp = line.substr(last, line.size() - last);
 				start_quote = temp.find("\"");
-				if (start_quote == string::npos) {
+				if (start_quote == string::npos && line.size() > last) {
 					//there no quotes
 					vec.push_back(temp);
-				}
-				else {
-					//there are quotes
-					size_t end_quote = temp.find("\"", start_quote + 1);
-					vec.push_back(temp.substr(start_quote + 1, end_quote - start_quote - 1));
 				}
 				reached_end = true;
 			}
 			else if (start_quote < found) {
+				// in a string
 				size_t end_quote = line.find("\"", start_quote + 1);
 				string temp = line.substr(start_quote + 1, end_quote - start_quote - 1);
 				if (curr != indexes.end() && i == *curr) {
@@ -123,7 +120,7 @@ int main() {
 					curr++;
 				}
 				last = found + 1;
-				found = line.find(",", last + 1);
+				found = line.find(",", last);
 			}
 		}
 
@@ -131,7 +128,7 @@ int main() {
 
 		//print out tokens from this row
 		for (vector<string>::iterator i = vec.begin(); i != vec.end(); i++) {
-			cout << *i << "\t";
+			cout << "'" << *i << "' ";
 		}
 		cout << endl;
 	}
@@ -141,7 +138,7 @@ int main() {
 	json.close();
 
 	//cout << daysJsonify("MWF");
-	cout << timeJsonify("05:30 am-08:30 pm");
+	//cout << timeJsonify("05:30 am-08:30 pm");
 
 	return 0;
 }
