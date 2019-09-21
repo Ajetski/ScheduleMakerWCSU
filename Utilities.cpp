@@ -12,7 +12,7 @@ string endJson() {
 }
 string jsonifyMeeting(vector<string> data) {// to be implemented // need to add arguments based on the parsed data 
 											// generates a single meeting block to be added to the schedule
-	string title = ("");
+	string title = ("temp");
 	return title;
 }
 
@@ -51,47 +51,15 @@ string timeJsonify(string time) {
 	*/
 }
 
-string daysJsonify(string days) {
-	//returns the json string given up to 6 letters( MTWRFS) representing Monday through Saturday, or will return an empty string if the class does not meet
-	//NOTE: could be efficiently used to check if a class does not meet
-	vector<char> dayVals{'M','T','W','R','F','S' };
-	vector<char>::iterator dayCharsIter = dayVals.begin();
-	vector<string> daysFlags;
-	string output = "";
-	string::iterator daysStringIter = days.begin();
-	// 1 for loop that goes through each char in list. if current char is equal to the curr iterator from dayVals,
-	// push true, else push false; at end of loop inc iterator
-	for (char weekDay : dayVals) {
-		if (daysStringIter != days.end() && dayCharsIter != dayVals.end() && *daysStringIter == *dayCharsIter) {
-			daysFlags.push_back("true");
-			daysStringIter++;
-		}
-		else {
-			daysFlags.push_back("false");
-		}
-		dayCharsIter++;
-	}
-	if (daysStringIter != days.begin()) {
-		output.append("\"days\": {\n\"monday\": " + daysFlags[0] +
-			",\n\"tuesday\": " + daysFlags[1] +
-			",\n\"wednesday\": " + daysFlags[2] +
-			",\n\"thursday\": " + daysFlags[3] +
-			",\n\"friday\": " + daysFlags[4] +
-			",\n\"saturday\": " + daysFlags[5] +
-			",\n\"sunday\": false\n}\n}\n");
-	}
 
-	
-	return output;
-}
-
-string daysJsonify2(string input) { //adams playground
+string daysJsonify(string input) { //adams playground
 	string output("");
 	vector<string> days{"M", "T", "W", "R", "F", "S"};
 	vector<string> format{ "\"days\": {\n\"monday\": ", ",\n\"tuesday\": ", ",\n\"wednesday\": ",
-		",\n\"thursday\": ", ",\n\"friday\": ", ",\n\"saturday\": ", ",\n\"sunday\": false\n}\n}\n" };
+		",\n\"thursday\": ", ",\n\"friday\": ", ",\n\"saturday\": ", ",\n\"sunday\": false\n}\n" };
 	size_t last = 0;
-	for (vector<string>::iterator daysIter = days.begin(), formatIter = format.begin(); daysIter != days.end() && formatIter != format.end(); daysIter++) {
+	vector<string>::iterator daysIter = days.begin(), formatIter = format.begin();
+	for (; daysIter != days.end() && formatIter != format.end(); daysIter++, formatIter++) {
 		size_t found = input.find(*daysIter, last);
 		if (found != string::npos) {
 			output.append(*formatIter + "true");
@@ -101,7 +69,9 @@ string daysJsonify2(string input) { //adams playground
 			output.append(*formatIter + "false");
 		}
 	}
-
+	if (formatIter != format.end()) {
+		output.append(*formatIter);
+	}
 	return output;
 }
 
