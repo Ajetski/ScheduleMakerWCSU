@@ -25,60 +25,61 @@ string timeJsonify() {//returns the json string from the
 string daysJsonify(string days) {
 	//returns the json string given up to 6 letters( MTWRFS) representing Monday through Saturday, or will return an empty string if the class does not meet
 	//NOTE: could be efficiently used to check if a class does not meet
-	vector<bool> daysFlags;
+	vector<char> dayVals = { 'M','T','W','R','F','S' };
+	vector<string> daysFlags;
 	string output = "";
 	int pos = 0;
-	for (int j = 0; j < (days.size() - 1);j++) {
-		while (pos < days.size()) {
+	for (int j = 0; j < (days.length() - 1);j++) {
+		while (pos < days.length()) {
 			if (days[j] == 'M') {
-				daysFlags.push_back(true);
+				daysFlags.push_back("true");
 				pos++;
 			}
 			else if (days[j] == 'T') {
 				for (int i = pos; i < 1; i++) {
-					daysFlags.push_back(false);
+					daysFlags.push_back("false");
 				}
-				daysFlags.push_back(true);
+				daysFlags.push_back("true");
 				pos++;
 			}
 			else if (days[j] == 'W') {
 				for (int i = pos; i < 2; i++) {
-					daysFlags.push_back(false);
+					daysFlags.push_back("false");
 				}
-				daysFlags.push_back(true);
+				daysFlags.push_back("true");
 				pos++;
 			}
 			else if (days[j] == 'R') {
 				for (int i = pos; i < 3; i++) {
-					daysFlags.push_back(false);
+					daysFlags.push_back("false");
 				}
-				daysFlags.push_back(true);
+				daysFlags.push_back("true");
 				pos++;
 			}
 			else if (days[j] == 'F') {
 				for (int i = pos; i < 4; i++) {
-					daysFlags.push_back(false);
+					daysFlags.push_back("false");
 				}
-				daysFlags.push_back(true);
+				daysFlags.push_back("true");
 				pos++;
 			}
 			else if (days[j] == 'S') {
 				for (int i = pos; i < 5; i++) {
-					daysFlags.push_back(false);
+					daysFlags.push_back("false");
 				}
-				daysFlags.push_back(true);
+				daysFlags.push_back("true");
 				pos++;
 			}
 		}
 	}
 	if (pos != 0) {
-		output.append("\"days\": {\n\"monday\": " + daysFlags[0]);
-		output.append(",\n\"tuesday\": " + daysFlags[1]);
-		output.append(",\n\"wednesday\": " + daysFlags[2]);
-		output.append(",\n\"thursday\": " + daysFlags[3]);
-		output.append(",\n\"friday\": " + daysFlags[4]);
-		output.append(",\n\"saturday\": " + daysFlags[5]);
-		output.append(",\n\"sunday\": false\n}\n}\n");
+		output.append("\"days\": {\n\"monday\": " + daysFlags[0] +
+			",\n\"tuesday\": " + daysFlags[1] +
+			",\n\"wednesday\": " + daysFlags[2] +
+			",\n\"thursday\": " + daysFlags[3] +
+			",\n\"friday\": " + daysFlags[4] +
+			",\n\"saturday\": " + daysFlags[5] +
+			",\n\"sunday\": false\n}\n}\n");
 	}
 
 	
