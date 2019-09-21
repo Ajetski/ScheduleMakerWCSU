@@ -85,6 +85,26 @@ string daysJsonify(string days) {
 	return output;
 }
 
+string daysJsonify2(string input) { //adams playground
+	string output("");
+	vector<string> days{"M", "T", "W", "R", "F", "S"};
+	vector<string> format{ "\"days\": {\n\"monday\": ", ",\n\"tuesday\": ", ",\n\"wednesday\": ",
+		",\n\"thursday\": ", ",\n\"friday\": ", ",\n\"saturday\": ", ",\n\"sunday\": false\n}\n}\n" };
+	size_t last = 0;
+	for (vector<string>::iterator daysIter = days.begin(), formatIter = format.begin(); daysIter != days.end() && formatIter != format.end(); daysIter++) {
+		size_t found = input.find(*daysIter, last);
+		if (found != string::npos) {
+			output.append(*formatIter + "true");
+			last = found;
+		}
+		else {
+			output.append(*formatIter + "false");
+		}
+	}
+
+	return output;
+}
+
 /*
 	Scratch paper
 

@@ -8,3 +8,4 @@ An optional prefix ! which negates the pattern; any matching file excluded by a 
 /Debug/*
 *.filters
 *DESKTOP*
+adam_test.cpp
