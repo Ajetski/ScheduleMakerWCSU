@@ -106,7 +106,7 @@ int main() {
 
 		//print out tokens from this row
 		for (size_t i = 0; i < vec.size(); i++) {
-			cout << vec[i] << endl;
+			cout << vec[i] << "\t";
 		}
 	}
 	inFile.close();
