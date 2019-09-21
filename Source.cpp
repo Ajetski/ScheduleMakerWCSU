@@ -61,7 +61,9 @@ int main() {
 	
 	//json << startJson(json)";
 
-	unsigned int indexes[] = { 3, 4, 5, 8, 9, 17, 18 };
+	//vector<unsigned int> indexes{ 3, 4, 5, 8, 9, 17, 18 };
+	vector<size_t> indexes{ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
+	
 
 	string line;
 
@@ -81,44 +83,40 @@ int main() {
 		vector<string> vec;
 
 		// token string into vec
+		vector<size_t>::iterator curr = indexes.begin();
 		size_t last = 0;
 		size_t found = line.find(",");
-		size_t found_string_open = line.find("\"", last);
-		size_t found_string_close= line.find("\"",found_string_open+1);
+		size_t start_quote = line.find("\"", last);
 		
 
 		//still need to solve issue of values potentially being strings with "," inside
-		for (unsigned int i = 0; found != string::npos; i++) {
-			if (found_string_open < found && found < found_string_close) {
-				//checks if we found a comma within a string rather than separating columns
-				if (i == 3 || i == 4 || i == 5 || i == 8 || i == 9 || i == 17 || i == 18) {
-					vec.push_back(line.substr(found_string_open+1,(found_string_close-found_string_open)-1));
+		for (size_t i = 0; found != string::npos; i++) {
+			if (start_quote < found) {
+				size_t end_quote = line.find("\"", start_quote + 1);
+				if (curr != indexes.end() && i == *curr) {
+					vec.push_back(line.substr(start_quote, end_quote));
+					curr++;
 				}
-				last = found_string_close + 1;
+				last = end_quote + 1;
+				start_quote = line.find("\"", end_quote + 1);
 				found = line.find(",", last);
-			}
-			else if (line.find(",", found + 1) == string::npos) {
-				//checks if we're looking at the final column
-				vec.push_back(line.substr(last, found-line.find("\n")));
-				found = line.find(",", found + 1);
-				last = found + 1;
-			}
-			
+			}			
 			else {
 				// not in a string
-				if (i == 3 || i == 4 || i == 5 || i == 8 || i == 9 || i == 17 || i == 18){
+				if (curr != indexes.end() && i == *curr) {
 					vec.push_back(line.substr(last, found - last));
+					curr++;
 				}
-				last =found + 1;
+				last = found + 1;
 				found = line.find(",", last);
 			}
 		}
 
-		cout << vec.size() << "\t";
+		cout << vec.size() << "\n";
 
 		//print out tokens from this row
-		for (size_t i = 0; i < vec.size(); i++) {
-			cout << vec[i] << "\t\t";
+		for (vector<string>::iterator i = vec.begin(); i != vec.end(); i++) {
+			cout << *i << "\n";
 		}
 		cout << endl;
 	}
