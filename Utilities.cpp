@@ -4,8 +4,14 @@
 using std::string;
 using std::vector;
 
-string startJson() {
-	return string("{\n\"dataCheck\": \"69761aa6-de4c-4013-b455-eb2a91fb2b76\",\n\"saveVersion\" : 4,\n\"schedules\" : [\n");
+string startJson(string prof) {
+	string title = (prof + "'s Schedule");
+	return string("{\n\"dataCheck\": \"69761aa6-de4c-4013-b455-eb2a91fb2b76\",\n\"saveVersion\" : 4,\n\"schedules\" : [\n\"title\": " + title  + ",\"items\" : [");
+	/*
+	{
+      "title": "",
+      "items": [
+	  */
 }
 
 string endJson() {
@@ -25,13 +31,10 @@ string jsonifyMeeting(vector<string> data, string prof) {// generates a single m
 	//unfinished.
 	//Plan:
 	//goto source.cpp and add conditionals chekcing if my curr vector is worth parsing. (is it the correct prof)?
-	//finish making this funciton generate the json data from data
-	size_t found = data[6].find(prof);
-	if (found == string::npos) {
-		return string("");
-	}
-	string title = (prof + "'s Schedule");
-	return title;
+	string output("{\n\"uid\": \"79c8fe46-035e-4579-b2d8-5f1c2b96f3a0\",\n\"type\": \"Course\",\n\"title\": " + data[0] + " " + data[1] + "-" + data[2] + string("\",\n\"meetingTimes\": [\n"));
+
+	output += "],\n\"backgroundColor\": \"" + data[7] + "\"\n}\n}\n";
+	return output;
 }
 
 string timeJsonify(string time) {
@@ -102,7 +105,7 @@ string daysJsonify(string input) {
 	{\n
 		\"uid\": \"79c8fe46-035e-4579-b2d8-5f1c2b96f3a0\",\n
 		\"type\": \"Course\",\n
-		\"title": \"CS 205\",\n
+		\"title\": \"CS 205\",\n
 		\"meetingTimes\": [\n
 
 

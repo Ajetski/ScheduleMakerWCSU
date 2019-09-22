@@ -5,8 +5,8 @@
 using std::string;
 using std::vector;
 
-string startJson();
+string startJson(string prof);
 string endJson();
 string daysJsonify(string weekdays);
 string timeJsonify(string time);
-string jsonifyMeeting(vector<string> data);
+string jsonifyMeeting(vector<string> data, string prof);
