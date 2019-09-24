@@ -52,13 +52,11 @@ int main() {
 	//(3) days at index 8
 	//(4) time at index 9
 	//(5) location at index 17
-	//(6) instructor at index 18
+	//(6) instructors at index 18
 
 	ofstream json; //a file that holds json data
 	json.open("output.csmo");
 	
-	
-	//json << startJson();
 
 	vector<size_t> indexes{ 3, 4, 5, 8, 9, 17, 18 };
 	//vector<size_t> indexes{ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19};
@@ -75,15 +73,10 @@ int main() {
 		exit(1); // terminate with error
 	}
 
-	/*
-	Plans: Add map of colors
-	Add checker to make sure its the correct prof
-	add checker to make sure if its the same class as "last" that it gets batched
-	*/
-	
+	vector<vector<string>> classList;
 
 	while (getline(inFile, line)) {
-
+		//reads from the file and converts csv data into a readable format
 		vector<string> vec;
 
 		// token string into vec
@@ -136,9 +129,28 @@ int main() {
 			cout << "'" << *i << "' ";
 		}
 		cout << endl;
+		
+		if (vec[3].compare("") != 0) {
+			classList.push_back(vec);
+		}
 	}
+
+	
+
 	inFile.close();
 
+	string instructorName="";
+	//json << startJson();
+	for (vector<string> cls : classList) {
+		vector<string> teachers;
+		size_t primary = cls[6].find("(P)");
+		size_t last = 0;
+		while (primary != string::npos) {
+			teachers.push_back(cls[6].substr(last, primary - last - 1));
+
+		}
+
+	}
 	//json << endJson();
 	json.close();
 
