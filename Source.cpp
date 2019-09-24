@@ -75,6 +75,11 @@ int main() {
 		exit(1); // terminate with error
 	}
 
+	/*
+	Plans: Add map of colors
+	Add checker to make sure its the correct prof
+	add checker to make sure if its the same class as "last" that it gets batched
+	*/
 	
 
 	while (getline(inFile, line)) {
