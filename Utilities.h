@@ -9,4 +9,4 @@ string startJson(string prof);
 string endJson();
 string daysJsonify(string weekdays);
 string timeJsonify(string time);
-string jsonifyMeeting(vector<string> data, string prof);
+string jsonifyMeeting(vector<vector<string>> data, string prof);
