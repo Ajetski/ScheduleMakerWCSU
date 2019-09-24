@@ -125,11 +125,14 @@ int main() {
 		cout << vec.size() << "\n";
 
 		//print out tokens from this row
+
+		/*
 		for (vector<string>::iterator i = vec.begin(); i != vec.end(); i++) {
 			cout << "'" << *i << "' ";
 		}
 		cout << endl;
-		
+		*/
+
 		if (vec[3].compare("") != 0) {
 			classList.push_back(vec);
 		}
@@ -146,8 +149,9 @@ int main() {
 		size_t primary = cls[6].find("(P)");
 		size_t last = 0;
 		while (primary != string::npos) {
-			teachers.push_back(cls[6].substr(last, primary - last - 1));
-
+			teachers.push_back(cls[6].substr(last, primary - last));
+			last = cls[6].find(",",last);
+			primary = cls[6].find(",", last + 1);
 		}
 
 	}
