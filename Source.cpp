@@ -139,9 +139,8 @@ int main() {
 			}
 		}
 	}
-	//output[output.size() - 1][output[output.size() - 1].size() - 3] = '\0';
-	output[output.size() - 1][output[output.size() - 1].size() - 2] = ' ';
-	output[output.size() - 1][output[output.size() - 1].size() - 1] = ' ';
+
+	output[output.size() - 1] = output[output.size() - 1].substr(0,(size_t) ((int) output[output.size() - 1].size() - 2));
 	output.push_back(endJson());
 	inFile.close();
 	std::ofstream json; //a file that holds json data
