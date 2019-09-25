@@ -5,8 +5,8 @@ using std::string;
 using std::vector;
 
 string startJson(string prof) {
-	string title = ("'" + prof + "'s Schedule" + "'");
-	return string("{\n\"dataCheck\": \"69761aa6-de4c-4013-b455-eb2a91fb2b76\",\n\"saveVersion\" : 4,\n\"schedules\" : [\n\"title\": " + title + ",\"items\" : [");
+	string title = ("\"" + prof + "'s Schedule" + "\"");
+	return string("{\n\"dataCheck\": \"69761aa6-de4c-4013-b455-eb2a91fb2b76\",\n\"saveVersion\" : 4,\n\"schedules\" : [{\n\"title\": " + title + ",\n\"items\" : [");
 	/*
 	{
 	  "title": "",
@@ -15,7 +15,7 @@ string startJson(string prof) {
 }
 
 string endJson() {
-	return string("\n\n],\n\"currentSchedule\": 0\n}");
+	return string("\n]\n}\n],\n\"currentSchedule\": 0\n}\n");
 }
 
 //Index mapping
@@ -34,7 +34,7 @@ string jsonifyMeeting(vector<vector<string>> data, string prof) {// generates a 
 	//goto source.cpp and add conditionals chekcing if my curr vector is worth parsing. (is it the correct prof)?
 	if (data[0][4].find("TBA") != string::npos) { return string(""); }
 
-	string output("{\n\"uid\": \"79c8fe46-035e-4579-b2d8-5f1c2b96f3a0\",\n\"type\": \"Course\",\n\"title\": " + data[0][0] + " " + data[0][1] + "-" + data[0][2] + string("\",\n\"meetingTimes\": [\n"));
+	string output("{\n\"uid\": \"79c8fe46-035e-4579-b2d8-5f1c2b96f3a0\",\n\"type\": \"Course\",\n\"title\": \"" + data[0][0] + " " + data[0][1] + "-" + data[0][2] + string("\",\n\"meetingTimes\": [\n"));
 
 	if (data.size() > 1) {
 		for (int iter = 0; iter < data.size(); iter++) {
@@ -52,7 +52,7 @@ string jsonifyMeeting(vector<vector<string>> data, string prof) {// generates a 
 		output.append(daysJsonify(data[0][3]));
 	}
 
-	output += "],\n\"backgroundColor\": \"" + data[0][7] + "\"\n}\n}\n";
+	output += "}],\n\"backgroundColor\": \"" + data[0][7] + "\"\n},\n";
 	return output;
 }
 

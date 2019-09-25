@@ -1,54 +1,70 @@
 {
 "dataCheck": "69761aa6-de4c-4013-b455-eb2a91fb2b76",
 "saveVersion" : 4,
-"schedules" : [
-  "title"
-  :
-  "Sean Murthy's Schedule",
-  "items" : [{
+"schedules" : [{
+"title": "Dennis W. Dawson's Schedule",
+"items" : [{
 "uid": "79c8fe46-035e-4579-b2d8-5f1c2b96f3a0",
 "type": "Course",
-"title": "CS 110-3",
+"title": "AST 150-1",
 "meetingTimes": [
-  {
-    "uid": "866e9185-4a29-47ae-a4b0-0423e633c8be",
-    "courseType": "",
-    "instructor": "",
-    "location": "",
-    "startHour": 24,
-    "endHour": 13,
-    "startMinute": 30,
-    "endMinute": 45,
-    "days": {
-      "monday": false,
-      "tuesday": true,
-      "wednesday": false,
-      "thursday": false,
-      "friday": true,
-      "saturday": false,
-      "sunday": false
-    }
-  }
-],
+{
+"uid": "866e9185-4a29-47ae-a4b0-0423e633c8be",
+"courseType": "",
+"instructor": "",
+"location": "",
+"startHour": 12,
+"endHour": 13,
+"startMinute": 30,
+"endMinute": 45,
+"days": {
+"monday": false,
+"tuesday": true,
+"wednesday": false,
+"thursday": true,
+"friday": false,
+"saturday": false,
+"sunday": false
+}
+
+},
+{
+"uid": "866e9185-4a29-47ae-a4b0-0423e633c8be",
+"courseType": "",
+"instructor": "",
+"location": "",
+"startHour": 14,
+"endHour": 15,
+"startMinute": 0,
+"endMinute": 50,
+"days": {
+"monday": false,
+"tuesday": true,
+"wednesday": false,
+"thursday": false,
+"friday": false,
+"saturday": false,
+"sunday": false
+}
+}],
 "backgroundColor": "#8DC028"
-}
-}
+},
 {
 "uid": "79c8fe46-035e-4579-b2d8-5f1c2b96f3a0",
 "type": "Course",
-"title": "CS 140-1",
+"title": " -",
 "meetingTimes": [
 {
 "uid": "866e9185-4a29-47ae-a4b0-0423e633c8be",
 "courseType": "",
 "instructor": "",
 "location": "",
-"startHour": 09,
-"endHour": 11,
-"startMinute": 30,
-"endMinute": 10,
+"startHour": 14,
+"endHour": 15,
+"startMinute": 0,
+"endMinute": 50,
 "days": {
-"monday": true,
+"monday": false,
 "tuesday": false,
 "wednesday": false,
 "thursday": true,
@@ -56,26 +72,25 @@
 "saturday": false,
 "sunday": false
 }
-],
+}],
 "backgroundColor": "#2AFFE2"
-}
-}
+},
 {
 "uid": "79c8fe46-035e-4579-b2d8-5f1c2b96f3a0",
 "type": "Course",
-"title": "CS 205-1",
+"title": "PHY 590-71",
 "meetingTimes": [
 {
 "uid": "866e9185-4a29-47ae-a4b0-0423e633c8be",
 "courseType": "",
 "instructor": "",
 "location": "",
-"startHour": 15,
-"endHour": 17,
+"startHour": 17,
+"endHour": 20,
 "startMinute": 30,
-"endMinute": 10,
+"endMinute": 0,
 "days": {
-"monday": true,
+"monday": false,
 "tuesday": false,
 "wednesday": false,
 "thursday": true,
@@ -83,12 +98,11 @@
 "saturday": false,
 "sunday": false
 }
-],
+}],
 "backgroundColor": "#A1380F"
+}  
+]
 }
-}
-
-
 ],
 "currentSchedule": 0
 }

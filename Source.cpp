@@ -58,6 +58,8 @@ int main() {
 	//(6) instructors at index 18
 	//(7) color
 
+	vector<string> output;
+
 	vector<string> colors{ "#8DC028", "#2AFFE2", "#A1380F", "#3216EB", "#CC673E", "#53E29A", "#384E32", "#95D711", "#4EB3B1", "#3A7ECE" };
 	vector<string>::iterator colorIter = colors.begin();
 
@@ -66,9 +68,8 @@ int main() {
 	getline(cin, prof);
 	
 
-	ofstream json; //a file that holds json data
-	json.open("output.csmo");
-	json << startJson(prof);
+	
+	output.push_back(startJson(prof));
 
 
 	ifstream inFile;
@@ -101,7 +102,7 @@ int main() {
 			else if (colorIter != colors.end() && classVec.size() >= 1) {
 				//curr is not a second instance of the same class as 
 				classVec[0].push_back(*(colorIter++));
-				json << jsonifyMeeting(classVec, prof);
+				output.push_back(jsonifyMeeting(classVec, prof));
 				classVec.clear();
 				top.clear();
 			}
@@ -109,7 +110,7 @@ int main() {
 				//curr is not a second instance of the same class as top
 				classVec.push_back(top);
 				classVec[0].push_back(*(colorIter++));
-				json << jsonifyMeeting(classVec, prof);
+				output.push_back(jsonifyMeeting(classVec, prof));
 				classVec.clear();
 				top.clear();
 			}
@@ -117,7 +118,7 @@ int main() {
 		else {
 			if (!classVec.empty() && colorIter != colors.end()) {
 				classVec[0].push_back(*(colorIter++));
-				json << jsonifyMeeting(classVec, prof);
+				output.push_back(jsonifyMeeting(classVec, prof));
 				classVec.clear();
 				top.clear();
 			}
@@ -132,8 +133,17 @@ int main() {
 		}
 
 	}
-	json << endJson();
+	//output[output.size() - 1][output[output.size() - 1].size() - 3] = '\0';
+	output[output.size() - 1][output[output.size() - 1].size() - 2] = '\0';
+	output[output.size() - 1][output[output.size() - 1].size() - 1] = '\0';
+	output[output.size() - 1][output[output.size() - 1].size()] = '\0';
+	output.push_back(endJson());
 	inFile.close();
+	ofstream json; //a file that holds json data
+	json.open("output.csmo");
+	for (vector<string>::iterator i = output.begin(); i != output.end(); i++) {
+		json << *i;
+	}
 	json.close();
 }
 
