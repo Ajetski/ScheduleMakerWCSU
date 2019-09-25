@@ -60,9 +60,10 @@ int main() {
 
 	vector<string> colors{ "#8DC028", "#2AFFE2", "#A1380F", "#3216EB", "#CC673E", "#53E29A", "#384E32", "#95D711", "#4EB3B1", "#3A7ECE" };
 	vector<string>::iterator colorIter = colors.begin();
-
-	cout << "Please input the name of a professor:\n>Sean Murthy\n";
-	string prof("Sean Murthy");
+	//replace this with asking for a name
+	string prof("Dennis W. Dawson");
+	cout << "Please input the name of a professor:\n>" << prof << "\n";
+	
 
 	ofstream json; //a file that holds json data
 	json.open("output.csmo");
@@ -87,12 +88,12 @@ int main() {
 			if (curr[0].size() < 1) {
 				//curr is a second instance of the same class as top
 				if (classVec.empty()) {
-					classVec.push_back(top);
-					classVec.push_back(curr);
+					if (isPhysical(top))classVec.push_back(top);
+					if (isPhysical(curr))classVec.push_back(curr);
 					top.clear();
 				}
 				else {
-					classVec.push_back(curr);
+					if (isPhysical(curr))classVec.push_back(curr);
 				}
 			}
 			else if (colorIter != colors.end() && classVec.size() >= 1) {
@@ -103,7 +104,7 @@ int main() {
 				classVec.clear();
 				top.clear();
 			}
-			else if (colorIter != colors.end()) {
+			else if (colorIter != colors.end() && isPhysical(top)) {
 				//curr is not a second instance of the same class as top
 				//json << jsonifyMeetings();
 				classVec.push_back(top);
