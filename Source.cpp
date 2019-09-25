@@ -25,6 +25,7 @@ Edge Cases:
 #include <string>
 #include <sstream>
 #include <vector>
+#include <set>
 #include "Utilities.h"
 
 
@@ -36,6 +37,8 @@ using std::endl;
 using std::cin;
 using std::string;
 using std::ios;
+using std::set;
+
 
 vector<string> vectorizeString(string line);
 bool isPhysical(vector<string> vec);
@@ -51,6 +54,7 @@ int main() {
 	//(1) course at index 4
 	//(2) section at index 5
 	//(3) days at index 8
+	//(3) days at index 8
 	//(4) time at index 9
 	//(5) location at index 17
 	//(6) instructors at index 18
@@ -58,8 +62,10 @@ int main() {
 
 	vector<string> output;
 
-	vector<string> colors{ "#8DC028", "#2AFFE2", "#A1380F", "#3216EB", "#CC673E", "#53E29A", "#384E32", "#95D711", "#4EB3B1", "#3A7ECE" };
-	vector<string>::iterator colorIter = colors.begin();
+	set<string> colors{ "#8DC028", "#2AFFE2", "#A1380F", "#3216EB", "#CC673E", "#53E29A",
+		"#384E32", "#95D711", "#4EB3B1", "#3A7ECE", "#BD4433", "#E16D5C", "#933AB2", "#A78335",
+		"#A78335", "#ED5471", "#6DC81E", "#7DC4FE", "#3C7AA0", "#103D5B"};
+	set<string>::iterator colorIter = colors.begin();
 
 	string prof;
 	cout << "Please input the name of a professor:\n>";
@@ -103,6 +109,10 @@ int main() {
 				output.push_back(jsonifyMeeting(classVec, prof));
 				classVec.clear();
 				top.clear();
+				if (curr[6].find(prof) != string::npos && isPhysical(curr)) {
+					top = curr;
+					classVec.push_back(top);
+				}
 			}
 			else if (colorIter != colors.end() && isPhysical(top)) {
 				//curr is not a second instance of the same class as top
@@ -129,7 +139,6 @@ int main() {
 				curr.clear();
 			}
 		}
-
 	}
 	//output[output.size() - 1][output[output.size() - 1].size() - 3] = '\0';
 	output[output.size() - 1][output[output.size() - 1].size() - 2] = ' ';
