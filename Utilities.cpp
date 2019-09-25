@@ -29,9 +29,6 @@ string endJson() {
 	//(7) color
 
 string jsonifyMeeting(vector<vector<string>> data, string prof) {// generates a single meeting block to be added to the schedule
-	//unfinished.
-	//Plan:
-	//goto source.cpp and add conditionals chekcing if my curr vector is worth parsing. (is it the correct prof)?
 	if (data[0][4].find("TBA") != string::npos) { return string(""); }
 
 	string output("{\n\"uid\": \"79c8fe46-035e-4579-b2d8-5f1c2b96f3a0\",\n\"type\": \"Course\",\n\"title\": \"" + data[0][0] + " " + data[0][1] + "-" + data[0][2] + string("\",\n\"meetingTimes\": [\n"));
