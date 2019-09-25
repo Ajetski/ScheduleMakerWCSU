@@ -58,14 +58,18 @@ int main() {
 	//(6) instructors at index 18
 	//(7) color
 
-	vector<string> colors{ "#8DC028", "#2AFFE2", "#A1380F", "#3216EB", "#CC673E", "#53E29A", "#384E32", "#95D711", "#4EB3B1", "#3A7ECE"};
+	vector<string> output;
+
+	vector<string> colors{ "#8DC028", "#2AFFE2", "#A1380F", "#3216EB", "#CC673E", "#53E29A", "#384E32", "#95D711", "#4EB3B1", "#3A7ECE" };
 	vector<string>::iterator colorIter = colors.begin();
 
-	cout << "Please input the name of a professor:\n>Sean Murthy\n";
-	string prof("Sean Murthy");
+	string prof;
+	cout << "Please input the name of a professor:\n>";
+	getline(cin, prof);
+	
 
-	ofstream json; //a file that holds json data
-	json.open("output.csmo");
+	
+	output.push_back(startJson(prof));
 
 
 	ifstream inFile;
@@ -80,63 +84,72 @@ int main() {
 	vector<vector<string>> classVec;
 	string line;
 
-	if (getline(inFile, line)) {
-		vector<string> top;
-		while (getline(inFile, line)) {
-			vector<string> curr = vectorizeString(line);
-			if (!top.empty()) {
-				if (curr[0].size() < 1) {
-					//curr is a second instance of the same class as top
-					if (classVec.empty()) {
-						classVec.push_back(top);
-						classVec.push_back(curr);
-						top.clear();
-					}
-					else {
-						classVec.push_back(curr);
-					}
-				}
-				else if (colorIter != colors.end() && classVec.size() >= 1) {
-					//curr is not a second instance of the same class as top
-					//json << jsonifyMeetings();
-					classVec[0].push_back(*(colorIter++));
-					cout << jsonifyMeeting(classVec, prof);
-					classVec.clear();
-				}
-				else if (colorIter != colors.end()) {
-					//curr is not a second instance of the same class as top
-					//json << jsonifyMeetings();
-					classVec.push_back(top);
-					classVec[0].push_back(*(colorIter++));
-					cout << jsonifyMeeting(classVec, prof);
-					classVec.clear();
-				}
-			}
-			else {
-				if (!classVec.empty() && colorIter != colors.end()) {
-					//json << jsonifyMeetings();
-					classVec[0].push_back(*(colorIter++));
-					cout << jsonifyMeeting(classVec, prof);
-					classVec.clear();
-				}
-				if (curr[6].find(prof) != string::npos && isPhysical(curr)) {
-					top = curr;
-					classVec.push_back(top);
+	vector<string> top;
+	while (getline(inFile, line)) {
+		vector<string> curr = vectorizeString(line);
+		if (!top.empty()) {
+			if (curr[0].size() < 1) {
+				//curr is a second instance of the same class as top
+				if (classVec.empty()) {
+					if (isPhysical(top))classVec.push_back(top);
+					if (isPhysical(curr))classVec.push_back(curr);
+					top.clear();
 				}
 				else {
-					top.clear();
-					curr.clear();
+					if (isPhysical(curr))classVec.push_back(curr);
 				}
 			}
+			else if (colorIter != colors.end() && classVec.size() >= 1) {
+				//curr is not a second instance of the same class as 
+				classVec[0].push_back(*(colorIter++));
+				output.push_back(jsonifyMeeting(classVec, prof));
+				classVec.clear();
+				top.clear();
+			}
+			else if (colorIter != colors.end() && isPhysical(top)) {
+				//curr is not a second instance of the same class as top
+				classVec.push_back(top);
+				classVec[0].push_back(*(colorIter++));
+				output.push_back(jsonifyMeeting(classVec, prof));
+				classVec.clear();
+				top.clear();
+			}
 		}
+		else {
+			if (!classVec.empty() && colorIter != colors.end()) {
+				classVec[0].push_back(*(colorIter++));
+				output.push_back(jsonifyMeeting(classVec, prof));
+				classVec.clear();
+				top.clear();
+			}
+			if (curr[6].find(prof) != string::npos && isPhysical(curr)) {
+				top = curr;
+				classVec.push_back(top);
+			}
+			else {
+				top.clear();
+				curr.clear();
+			}
+		}
+
 	}
+	//output[output.size() - 1][output[output.size() - 1].size() - 3] = '\0';
+	output[output.size() - 1][output[output.size() - 1].size() - 2] = '\0';
+	output[output.size() - 1][output[output.size() - 1].size() - 1] = '\0';
+	output[output.size() - 1][output[output.size() - 1].size()] = '\0';
+	output.push_back(endJson());
 	inFile.close();
+	ofstream json; //a file that holds json data
+	json.open("output.csmo");
+	for (vector<string>::iterator i = output.begin(); i != output.end(); i++) {
+		json << *i;
+	}
 	json.close();
 }
 
 
 //returns a vecotr of data from a string
-vector<string> vectorizeString(string line){
+vector<string> vectorizeString(string line) {
 	vector<size_t> indexes{ 3, 4, 5, 8, 9, 17, 18 };
 	vector<string> vec;
 	vector<size_t>::iterator curr = indexes.begin();

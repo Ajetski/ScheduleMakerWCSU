@@ -5,8 +5,8 @@ using std::string;
 using std::vector;
 
 string startJson(string prof) {
-	string title = (prof + "'s Schedule");
-	return string("{\n\"dataCheck\": \"69761aa6-de4c-4013-b455-eb2a91fb2b76\",\n\"saveVersion\" : 4,\n\"schedules\" : [\n\"title\": " + title + ",\"items\" : [");
+	string title = ("\"" + prof + "'s Schedule" + "\"");
+	return string("{\n\"dataCheck\": \"69761aa6-de4c-4013-b455-eb2a91fb2b76\",\n\"saveVersion\" : 4,\n\"schedules\" : [{\n\"title\": " + title + ",\n\"items\" : [");
 	/*
 	{
 	  "title": "",
@@ -15,7 +15,7 @@ string startJson(string prof) {
 }
 
 string endJson() {
-	return string("\n\n],\n\"currentSchedule\": 0\n}");
+	return string("\n]\n}\n],\n\"currentSchedule\": 0\n}\n");
 }
 
 //Index mapping
@@ -32,8 +32,9 @@ string jsonifyMeeting(vector<vector<string>> data, string prof) {// generates a 
 	//unfinished.
 	//Plan:
 	//goto source.cpp and add conditionals chekcing if my curr vector is worth parsing. (is it the correct prof)?
+	if (data[0][4].find("TBA") != string::npos) { return string(""); }
 
-	string output("{\n\"uid\": \"79c8fe46-035e-4579-b2d8-5f1c2b96f3a0\",\n\"type\": \"Course\",\n\"title\": " + data[0][0] + " " + data[0][1] + "-" + data[0][2] + string("\",\n\"meetingTimes\": [\n"));
+	string output("{\n\"uid\": \"79c8fe46-035e-4579-b2d8-5f1c2b96f3a0\",\n\"type\": \"Course\",\n\"title\": \"" + data[0][0] + " " + data[0][1] + "-" + data[0][2] + string("\",\n\"meetingTimes\": [\n"));
 
 	if (data.size() > 1) {
 		for (int iter = 0; iter < data.size(); iter++) {
@@ -51,7 +52,7 @@ string jsonifyMeeting(vector<vector<string>> data, string prof) {// generates a 
 		output.append(daysJsonify(data[0][3]));
 	}
 
-	output += "],\n\"backgroundColor\": \"" + data[0][7] + "\"\n}\n}\n";
+	output += "}],\n\"backgroundColor\": \"" + data[0][7] + "\"\n},\n";
 	return output;
 }
 
@@ -66,12 +67,22 @@ string timeJsonify(string time) {
 		string strtHr = strtTime.substr(0, strtTime.find(':'));
 		string finHr = finTime.substr(0, finTime.find(':'));
 
-		if (strtTime.find("pm") != string::npos) {
+		if (strtTime.find("pm") != string::npos&& strtTime.substr(0, 2).compare("12")!=0) {
 			strtHr = std::to_string(12 + stoi(strtTime.substr(0, 2)));
 		}
-		if (finTime.find("pm") != string::npos) {
+		if (finTime.find("pm") != string::npos && finTime.substr(0, 2).compare("12") != 0) {
 			finHr = std::to_string(12 + stoi(finTime.substr(0, 2)));
 		}
+		if (strtTime.find("am") != string::npos && strtTime.substr(0, 2).compare("12") != 0) {
+			strtHr = std::to_string(12 + stoi(strtTime.substr(0, 2)));
+		}
+		if (finTime.find("am") != string::npos && finTime.substr(0, 2).compare("12") != 0) {
+			finHr = std::to_string(12 + stoi(finTime.substr(0, 2)));
+		}
+
+		string strtMin = std::to_string(stoi(strtTime.substr(strtTime.find(':') + 1, 2)));
+		string finMin = std::to_string(stoi(finTime.substr(finTime.find(':') + 1, 2)));
+		//casting to make 00 into 0
 
 		meetingTime.append("\"startHour\": " + strtHr +
 			",\n\"endHour\": " + finHr +
