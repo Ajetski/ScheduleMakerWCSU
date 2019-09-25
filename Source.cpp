@@ -29,15 +29,13 @@ Edge Cases:
 
 
 
-/*
+
 using std::ifstream;
 using std::cout;
 using std::endl;
 using std::cin;
 using std::string;
-using std::ios;*/
-
-using namespace std;
+using std::ios;
 
 vector<string> vectorizeString(string line);
 bool isPhysical(vector<string> vec);
@@ -138,7 +136,7 @@ int main() {
 	output[output.size() - 1][output[output.size() - 1].size() - 1] = ' ';
 	output.push_back(endJson());
 	inFile.close();
-	ofstream json; //a file that holds json data
+	std::ofstream json; //a file that holds json data
 	json.open("output.csmo");
 	for (vector<string>::iterator i = output.begin(); i != output.end(); i++) {
 		json << *i;
