@@ -73,8 +73,8 @@ int main() {
 
 
 	ifstream inFile;
-	//inFile.open("Fall2019OpenClose.csv");
-	inFile.open("test.csv");
+	inFile.open("Fall2019OpenClose.csv");
+	//inFile.open("test.csv");
 
 	if (!inFile.is_open()) {
 		cout << "Unable to open file";
@@ -134,9 +134,8 @@ int main() {
 
 	}
 	//output[output.size() - 1][output[output.size() - 1].size() - 3] = '\0';
-	output[output.size() - 1][output[output.size() - 1].size() - 2] = '\0';
-	output[output.size() - 1][output[output.size() - 1].size() - 1] = '\0';
-	output[output.size() - 1][output[output.size() - 1].size()] = '\0';
+	output[output.size() - 1][output[output.size() - 1].size() - 2] = ' ';
+	output[output.size() - 1][output[output.size() - 1].size() - 1] = ' ';
 	output.push_back(endJson());
 	inFile.close();
 	ofstream json; //a file that holds json data
@@ -145,6 +144,7 @@ int main() {
 		json << *i;
 	}
 	json.close();
+	inFile.close();
 }
 
 

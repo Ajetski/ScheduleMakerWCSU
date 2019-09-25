@@ -2,11 +2,11 @@
 "dataCheck": "69761aa6-de4c-4013-b455-eb2a91fb2b76",
 "saveVersion" : 4,
 "schedules" : [{
-"title": "Dennis W. Dawson's Schedule",
+"title": "Sean Murthy's Schedule",
 "items" : [{
 "uid": "79c8fe46-035e-4579-b2d8-5f1c2b96f3a0",
 "type": "Course",
-"title": "AST 150-1",
+"title": "CS 110-3",
 "meetingTimes": [
 {
 "uid": "866e9185-4a29-47ae-a4b0-0423e633c8be",
@@ -21,28 +21,8 @@
 "monday": false,
 "tuesday": true,
 "wednesday": false,
-"thursday": true,
-"friday": false,
-"saturday": false,
-"sunday": false
-}
-
-},
-{
-"uid": "866e9185-4a29-47ae-a4b0-0423e633c8be",
-"courseType": "",
-"instructor": "",
-"location": "",
-"startHour": 14,
-"endHour": 15,
-"startMinute": 0,
-"endMinute": 50,
-"days": {
-"monday": false,
-"tuesday": true,
-"wednesday": false,
 "thursday": false,
-"friday": false,
+"friday": true,
 "saturday": false,
 "sunday": false
 }
@@ -52,19 +32,19 @@
 {
 "uid": "79c8fe46-035e-4579-b2d8-5f1c2b96f3a0",
 "type": "Course",
-"title": " -",
+"title": "CS 140-1",
 "meetingTimes": [
 {
 "uid": "866e9185-4a29-47ae-a4b0-0423e633c8be",
 "courseType": "",
 "instructor": "",
 "location": "",
-"startHour": 14,
-"endHour": 15,
-"startMinute": 0,
-"endMinute": 50,
+"startHour": 21,
+"endHour": 23,
+"startMinute": 30,
+"endMinute": 10,
 "days": {
-"monday": false,
+"monday": true,
 "tuesday": false,
 "wednesday": false,
 "thursday": true,
@@ -78,19 +58,19 @@
 {
 "uid": "79c8fe46-035e-4579-b2d8-5f1c2b96f3a0",
 "type": "Course",
-"title": "PHY 590-71",
+"title": "CS 205-1",
 "meetingTimes": [
 {
 "uid": "866e9185-4a29-47ae-a4b0-0423e633c8be",
 "courseType": "",
 "instructor": "",
 "location": "",
-"startHour": 17,
-"endHour": 20,
+"startHour": 15,
+"endHour": 17,
 "startMinute": 30,
-"endMinute": 0,
+"endMinute": 10,
 "days": {
-"monday": false,
+"monday": true,
 "tuesday": false,
 "wednesday": false,
 "thursday": true,
