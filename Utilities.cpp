@@ -38,7 +38,7 @@ string jsonifyMeeting(vector<vector<string>> data, string prof) {// generates a 
 
 	if (data.size() > 1) {
 		for (size_t iter = 0; iter < data.size(); iter++) {
-			output.append("{\n\"uid\": \"866e9185-4a29-47ae-a4b0-0423e633c8be\",\n\"courseType\": \"\",\n\"instructor\": \"\",\n\"location\": \"\",\n");
+			output.append("{\n\"uid\": \"866e9185-4a29-47ae-a4b0-0423e633c8be\",\n\"courseType\": \"\",\n\"instructor\": \"\",\n\"location\": \"" + data[iter][5] + ("\",\n"));
 			output.append(timeJsonify(data[iter][4]));
 			output.append(daysJsonify(data[iter][3]));
 			if (iter < data.size() - 1) {
@@ -47,7 +47,7 @@ string jsonifyMeeting(vector<vector<string>> data, string prof) {// generates a 
 		}
 	}
 	else {
-		output.append("{\n\"uid\": \"866e9185-4a29-47ae-a4b0-0423e633c8be\",\n\"courseType\": \"\",\n\"instructor\": \"\",\n\"location\": \"\",\n");
+		output.append("{\n\"uid\": \"866e9185-4a29-47ae-a4b0-0423e633c8be\",\n\"courseType\": \"\",\n\"instructor\": \"\",\n\"location\": \"" + data[0][5]  + string("\",\n"));
 		output.append(timeJsonify(data[0][4]));
 		output.append(daysJsonify(data[0][3]));
 	}
