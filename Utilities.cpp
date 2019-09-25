@@ -37,8 +37,8 @@ string jsonifyMeeting(vector<vector<string>> data, string prof) {// generates a 
 	string output("{\n\"uid\": \"79c8fe46-035e-4579-b2d8-5f1c2b96f3a0\",\n\"type\": \"Course\",\n\"title\": \"" + data[0][0] + " " + data[0][1] + "-" + data[0][2] + string("\",\n\"meetingTimes\": [\n"));
 
 	if (data.size() > 1) {
-		for (int iter = 0; iter < data.size(); iter++) {
-			output.append("{\n\"uid\": \"866e9185-4a29-47ae-a4b0-0423e633c8be\",\n\"courseType\": \"\",\n\"instructor\": \"\",\n\"location\": \"\",\n");
+		for (size_t iter = 0; iter < data.size(); iter++) {
+			output.append("{\n\"uid\": \"866e9185-4a29-47ae-a4b0-0423e633c8be\",\n\"courseType\": \"\",\n\"instructor\": \"\",\n\"location\": \"" + data[iter][5] + ("\",\n"));
 			output.append(timeJsonify(data[iter][4]));
 			output.append(daysJsonify(data[iter][3]));
 			if (iter < data.size() - 1) {
@@ -47,7 +47,7 @@ string jsonifyMeeting(vector<vector<string>> data, string prof) {// generates a 
 		}
 	}
 	else {
-		output.append("{\n\"uid\": \"866e9185-4a29-47ae-a4b0-0423e633c8be\",\n\"courseType\": \"\",\n\"instructor\": \"\",\n\"location\": \"\",\n");
+		output.append("{\n\"uid\": \"866e9185-4a29-47ae-a4b0-0423e633c8be\",\n\"courseType\": \"\",\n\"instructor\": \"\",\n\"location\": \"" + data[0][5]  + string("\",\n"));
 		output.append(timeJsonify(data[0][4]));
 		output.append(daysJsonify(data[0][3]));
 	}
@@ -73,21 +73,23 @@ string timeJsonify(string time) {
 		if (finTime.find("pm") != string::npos && finTime.substr(0, 2).compare("12") != 0) {
 			finHr = std::to_string(12 + stoi(finTime.substr(0, 2)));
 		}
-		if (strtTime.find("am") != string::npos && strtTime.substr(0, 2).compare("12") != 0) {
-			strtHr = std::to_string(12 + stoi(strtTime.substr(0, 2)));
+		if (strtTime.find("am") != string::npos && strtTime.substr(0, 2).compare("12") == 0) {
+			strtHr = std::to_string(12 - stoi(strtTime.substr(0, 2)));
 		}
-		if (finTime.find("am") != string::npos && finTime.substr(0, 2).compare("12") != 0) {
-			finHr = std::to_string(12 + stoi(finTime.substr(0, 2)));
+		if (finTime.find("am") != string::npos && finTime.substr(0, 2).compare("12") == 0) {
+			finHr = std::to_string(12 - stoi(finTime.substr(0, 2)));
 		}
 
+		strtHr = std::to_string(stoi(strtHr));
+		finHr = std::to_string(stoi(finHr));
 		string strtMin = std::to_string(stoi(strtTime.substr(strtTime.find(':') + 1, 2)));
 		string finMin = std::to_string(stoi(finTime.substr(finTime.find(':') + 1, 2)));
 		//casting to make 00 into 0
 
 		meetingTime.append("\"startHour\": " + strtHr +
 			",\n\"endHour\": " + finHr +
-			",\n\"startMinute\": " + strtTime.substr(strtTime.find(':') + 1, 2) +
-			",\n\"endMinute\": " + finTime.substr(finTime.find(':') + 1, 2) +
+			",\n\"startMinute\": " + strtMin +
+			",\n\"endMinute\": " + finMin +
 			",\n");
 	}
 
