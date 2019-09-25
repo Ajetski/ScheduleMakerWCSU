@@ -60,18 +60,20 @@ int main() {
 
 	vector<string> colors{ "#8DC028", "#2AFFE2", "#A1380F", "#3216EB", "#CC673E", "#53E29A", "#384E32", "#95D711", "#4EB3B1", "#3A7ECE" };
 	vector<string>::iterator colorIter = colors.begin();
-	//replace this with asking for a name
-	string prof("Dennis W. Dawson");
-	cout << "Please input the name of a professor:\n>" << prof << "\n";
+
+	string prof;
+	cout << "Please input the name of a professor:\n>";
+	getline(cin, prof);
 	
 
 	ofstream json; //a file that holds json data
 	json.open("output.csmo");
+	json << startJson(prof);
 
 
 	ifstream inFile;
-	//inFile.open("Fall2019OpenClose.csv");
-	inFile.open("test.csv");
+	inFile.open("Fall2019OpenClose.csv");
+	//inFile.open("test.csv");
 
 	if (!inFile.is_open()) {
 		cout << "Unable to open file";
@@ -97,28 +99,25 @@ int main() {
 				}
 			}
 			else if (colorIter != colors.end() && classVec.size() >= 1) {
-				//curr is not a second instance of the same class as top
-				//json << jsonifyMeetings();
+				//curr is not a second instance of the same class as 
 				classVec[0].push_back(*(colorIter++));
-				cout << jsonifyMeeting(classVec, prof);
+				json << jsonifyMeeting(classVec, prof);
 				classVec.clear();
 				top.clear();
 			}
 			else if (colorIter != colors.end() && isPhysical(top)) {
 				//curr is not a second instance of the same class as top
-				//json << jsonifyMeetings();
 				classVec.push_back(top);
 				classVec[0].push_back(*(colorIter++));
-				cout << jsonifyMeeting(classVec, prof);
+				json << jsonifyMeeting(classVec, prof);
 				classVec.clear();
 				top.clear();
 			}
 		}
 		else {
 			if (!classVec.empty() && colorIter != colors.end()) {
-				//json << jsonifyMeetings();
 				classVec[0].push_back(*(colorIter++));
-				cout << jsonifyMeeting(classVec, prof);
+				json << jsonifyMeeting(classVec, prof);
 				classVec.clear();
 				top.clear();
 			}
@@ -133,6 +132,7 @@ int main() {
 		}
 
 	}
+	json << endJson();
 	inFile.close();
 	json.close();
 }

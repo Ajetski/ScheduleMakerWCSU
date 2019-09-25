@@ -9,3 +9,5 @@ An optional prefix ! which negates the pattern; any matching file excluded by a 
 *.filters
 *DESKTOP*
 adam_test.cpp
+*.json
+
