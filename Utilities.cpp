@@ -80,6 +80,10 @@ string timeJsonify(string time) {
 			finHr = std::to_string(12 + stoi(finTime.substr(0, 2)));
 		}
 
+		string strtMin = std::to_string(stoi(strtTime.substr(strtTime.find(':') + 1, 2)));
+		string finMin = std::to_string(stoi(finTime.substr(finTime.find(':') + 1, 2)));
+		//casting to make 00 into 0
+
 		meetingTime.append("\"startHour\": " + strtHr +
 			",\n\"endHour\": " + finHr +
 			",\n\"startMinute\": " + strtTime.substr(strtTime.find(':') + 1, 2) +
