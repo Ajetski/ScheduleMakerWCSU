@@ -6,11 +6,11 @@ using std::vector;
 
 string startJson(string prof) {
 	string title = (prof + "'s Schedule");
-	return string("{\n\"dataCheck\": \"69761aa6-de4c-4013-b455-eb2a91fb2b76\",\n\"saveVersion\" : 4,\n\"schedules\" : [\n\"title\": " + title  + ",\"items\" : [");
+	return string("{\n\"dataCheck\": \"69761aa6-de4c-4013-b455-eb2a91fb2b76\",\n\"saveVersion\" : 4,\n\"schedules\" : [\n\"title\": " + title + ",\"items\" : [");
 	/*
 	{
-      "title": "",
-      "items": [
+	  "title": "",
+	  "items": [
 	  */
 }
 
@@ -32,10 +32,12 @@ string jsonifyMeeting(vector<vector<string>> data, string prof) {// generates a 
 	//unfinished.
 	//Plan:
 	//goto source.cpp and add conditionals chekcing if my curr vector is worth parsing. (is it the correct prof)?
+	if (data[0][4].find("TBA") != string::npos) { return string(""); }
+
 	string output("{\n\"uid\": \"79c8fe46-035e-4579-b2d8-5f1c2b96f3a0\",\n\"type\": \"Course\",\n\"title\": " + data[0][0] + " " + data[0][1] + "-" + data[0][2] + string("\",\n\"meetingTimes\": [\n"));
-	
+
 	if (data.size() > 1) {
-		for (int iter = 0; iter < data.size();iter++) {
+		for (int iter = 0; iter < data.size(); iter++) {
 			output.append("{\n\"uid\": \"866e9185-4a29-47ae-a4b0-0423e633c8be\",\n\"courseType\": \"\",\n\"instructor\": \"\",\n\"location\": \"\",\n");
 			output.append(timeJsonify(data[iter][4]));
 			output.append(daysJsonify(data[iter][3]));
@@ -60,39 +62,39 @@ string timeJsonify(string time) {
 	string meetingTime = "";
 	if (time.length()) {
 		size_t div = time.find('-');
-		string strtTime = time.substr(time.find(':')-2, div);
+		string strtTime = time.substr(time.find(':') - 2, div);
 		string finTime = time.substr(div + 1);
 		string strtHr = strtTime.substr(0, strtTime.find(':'));
-		string finHr = finTime.substr(0,finTime.find(':'));
+		string finHr = finTime.substr(0, finTime.find(':'));
 
-		if (strtTime.find("pm")!=string::npos) {
+		if (strtTime.find("pm") != string::npos) {
 			strtHr = std::to_string(12 + stoi(strtTime.substr(0, 2)));
 		}
-		if (finTime.find("pm")!=string::npos) {
+		if (finTime.find("pm") != string::npos) {
 			finHr = std::to_string(12 + stoi(finTime.substr(0, 2)));
 		}
 
 		meetingTime.append("\"startHour\": " + strtHr +
 			",\n\"endHour\": " + finHr +
-			",\n\"startMinute\": " + strtTime.substr(strtTime.find(':')+1,2) +
+			",\n\"startMinute\": " + strtTime.substr(strtTime.find(':') + 1, 2) +
 			",\n\"endMinute\": " + finTime.substr(finTime.find(':') + 1, 2) +
 			",\n");
 	}
-	
+
 
 	return meetingTime;
 	/*
 		\"startHour\": ,\n
 		\"endHour\": ,\n
 		\"startMinute\": ,\n
-		\"endMinute\": ,\n		
+		\"endMinute\": ,\n
 	*/
 }
 
 
 string daysJsonify(string input) {
 	string output("");
-	vector<string> days{"M", "T", "W", "R", "F", "S"};
+	vector<string> days{ "M", "T", "W", "R", "F", "S" };
 	vector<string> format{ "\"days\": {\n\"monday\": ", ",\n\"tuesday\": ", ",\n\"wednesday\": ",
 		",\n\"thursday\": ", ",\n\"friday\": ", ",\n\"saturday\": ", ",\n\"sunday\": false\n}\n" };
 	size_t last = 0;
