@@ -5,7 +5,7 @@ using std::string;
 using std::vector;
 
 string startJson(string prof) {
-	string title = (prof + "'s Schedule");
+	string title = ("'" + prof + "'s Schedule" + "'");
 	return string("{\n\"dataCheck\": \"69761aa6-de4c-4013-b455-eb2a91fb2b76\",\n\"saveVersion\" : 4,\n\"schedules\" : [\n\"title\": " + title + ",\"items\" : [");
 	/*
 	{
