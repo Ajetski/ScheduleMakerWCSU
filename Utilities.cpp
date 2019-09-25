@@ -67,10 +67,10 @@ string timeJsonify(string time) {
 		string strtHr = strtTime.substr(0, strtTime.find(':'));
 		string finHr = finTime.substr(0, finTime.find(':'));
 
-		if (strtTime.find("pm") != string::npos) {
+		if (strtTime.find("pm") != string::npos&& strtTime.substr(0, 2).compare("12")!=0) {
 			strtHr = std::to_string(12 + stoi(strtTime.substr(0, 2)));
 		}
-		if (finTime.find("pm") != string::npos) {
+		if (finTime.find("pm") != string::npos && finTime.substr(0, 2).compare("12") != 0) {
 			finHr = std::to_string(12 + stoi(finTime.substr(0, 2)));
 		}
 
