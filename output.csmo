@@ -2,92 +2,52 @@
 "dataCheck": "69761aa6-de4c-4013-b455-eb2a91fb2b76",
 "saveVersion" : 4,
 "schedules" : [{
-"title": "MaryEllen D's Schedule",
+"title": "Sean Murthy's Schedule",
 "items" : [{
 "uid": "79c8fe46-035e-4579-b2d8-5f1c2b96f3a0",
 "type": "Course",
-"title": "NUR 201-1",
+"title": "CS 110-3",
 "meetingTimes": [
 {
 "uid": "866e9185-4a29-47ae-a4b0-0423e633c8be",
 "courseType": "",
 "instructor": "",
-"location": "WH 024",
+"location": "HI 029",
 "startHour": 12,
 "endHour": 13,
-"startMinute": 15,
-"endMinute": 30,
-"days": {
-"monday": true,
-"tuesday": false,
-"wednesday": true,
-"thursday": false,
-"friday": false,
-"saturday": false,
-"sunday": false
-}
-
-},
-{
-"uid": "866e9185-4a29-47ae-a4b0-0423e633c8be",
-"courseType": "",
-"instructor": "",
-"location": "WH 028",
-"startHour": 9,
-"endHour": 11,
-"startMinute": 0,
-"endMinute": 50,
+"startMinute": 30,
+"endMinute": 45,
 "days": {
 "monday": false,
 "tuesday": true,
 "wednesday": false,
 "thursday": false,
-"friday": false,
+"friday": true,
 "saturday": false,
 "sunday": false
 }
 }],
-"backgroundColor": "#103D5B"
+"backgroundColor": "#8DC028"
 },
 {
 "uid": "79c8fe46-035e-4579-b2d8-5f1c2b96f3a0",
 "type": "Course",
-"title": "NUR 201-2",
+"title": "CS 140-1",
 "meetingTimes": [
 {
 "uid": "866e9185-4a29-47ae-a4b0-0423e633c8be",
 "courseType": "",
 "instructor": "",
-"location": "WH 024",
-"startHour": 12,
-"endHour": 13,
-"startMinute": 15,
-"endMinute": 30,
+"location": "HI 029",
+"startHour": 9,
+"endHour": 11,
+"startMinute": 30,
+"endMinute": 10,
 "days": {
 "monday": true,
 "tuesday": false,
-"wednesday": true,
-"thursday": false,
-"friday": false,
-"saturday": false,
-"sunday": false
-}
-
-},
-{
-"uid": "866e9185-4a29-47ae-a4b0-0423e633c8be",
-"courseType": "",
-"instructor": "",
-"location": "WH 028",
-"startHour": 12,
-"endHour": 15,
-"startMinute": 30,
-"endMinute": 20,
-"days": {
-"monday": false,
-"tuesday": true,
 "wednesday": false,
-"thursday": false,
+"thursday": true,
 "friday": false,
 "saturday": false,
 "sunday": false
@@ -98,85 +58,19 @@
 {
 "uid": "79c8fe46-035e-4579-b2d8-5f1c2b96f3a0",
 "type": "Course",
-"title": "NUR 201-3",
+"title": "CS 205-1",
 "meetingTimes": [
 {
 "uid": "866e9185-4a29-47ae-a4b0-0423e633c8be",
 "courseType": "",
 "instructor": "",
-"location": "WH 024",
-"startHour": 12,
-"endHour": 13,
-"startMinute": 15,
-"endMinute": 30,
-"days": {
-"monday": true,
-"tuesday": false,
-"wednesday": true,
-"thursday": false,
-"friday": false,
-"saturday": false,
-"sunday": false
-}
-
-},
-{
-"uid": "866e9185-4a29-47ae-a4b0-0423e633c8be",
-"courseType": "",
-"instructor": "",
-"location": "WH 028",
+"location": "HI 031",
 "startHour": 15,
-"endHour": 18,
+"endHour": 17,
 "startMinute": 30,
-"endMinute": 20,
-"days": {
-"monday": false,
-"tuesday": true,
-"wednesday": false,
-"thursday": false,
-"friday": false,
-"saturday": false,
-"sunday": false
-}
-}],
-"backgroundColor": "#3216EB"
-},
-{
-"uid": "79c8fe46-035e-4579-b2d8-5f1c2b96f3a0",
-"type": "Course",
-"title": "NUR 201-4",
-"meetingTimes": [
-{
-"uid": "866e9185-4a29-47ae-a4b0-0423e633c8be",
-"courseType": "",
-"instructor": "",
-"location": "WH 024",
-"startHour": 12,
-"endHour": 13,
-"startMinute": 15,
-"endMinute": 30,
+"endMinute": 10,
 "days": {
 "monday": true,
-"tuesday": false,
-"wednesday": true,
-"thursday": false,
-"friday": false,
-"saturday": false,
-"sunday": false
-}
-
-},
-{
-"uid": "866e9185-4a29-47ae-a4b0-0423e633c8be",
-"courseType": "",
-"instructor": "",
-"location": "WH 028",
-"startHour": 9,
-"endHour": 11,
-"startMinute": 0,
-"endMinute": 50,
-"days": {
-"monday": false,
 "tuesday": false,
 "wednesday": false,
 "thursday": true,
@@ -185,213 +79,7 @@
 "sunday": false
 }
 }],
-"backgroundColor": "#384E32"
-},
-{
-"uid": "79c8fe46-035e-4579-b2d8-5f1c2b96f3a0",
-"type": "Course",
-"title": "NUR 504-71",
-"meetingTimes": [
-{
-"uid": "866e9185-4a29-47ae-a4b0-0423e633c8be",
-"courseType": "",
-"instructor": "",
-"location": "WH 024",
-"startHour": 17,
-"endHour": 20,
-"startMinute": 30,
-"endMinute": 0,
-"days": {
-"monday": false,
-"tuesday": false,
-"wednesday": true,
-"thursday": false,
-"friday": false,
-"saturday": false,
-"sunday": false
-}
-
-},
-{
-"uid": "866e9185-4a29-47ae-a4b0-0423e633c8be",
-"courseType": "",
-"instructor": "",
-"location": "WH 024",
-"startHour": 17,
-"endHour": 20,
-"startMinute": 30,
-"endMinute": 0,
-"days": {
-"monday": false,
-"tuesday": false,
-"wednesday": true,
-"thursday": false,
-"friday": false,
-"saturday": false,
-"sunday": false
-}
-
-},
-{
-"uid": "866e9185-4a29-47ae-a4b0-0423e633c8be",
-"courseType": "",
-"instructor": "",
-"location": "WH 024",
-"startHour": 17,
-"endHour": 20,
-"startMinute": 30,
-"endMinute": 0,
-"days": {
-"monday": false,
-"tuesday": false,
-"wednesday": true,
-"thursday": false,
-"friday": false,
-"saturday": false,
-"sunday": false
-}
-
-},
-{
-"uid": "866e9185-4a29-47ae-a4b0-0423e633c8be",
-"courseType": "",
-"instructor": "",
-"location": "WH 024",
-"startHour": 17,
-"endHour": 20,
-"startMinute": 30,
-"endMinute": 0,
-"days": {
-"monday": false,
-"tuesday": false,
-"wednesday": true,
-"thursday": false,
-"friday": false,
-"saturday": false,
-"sunday": false
-}
-
-},
-{
-"uid": "866e9185-4a29-47ae-a4b0-0423e633c8be",
-"courseType": "",
-"instructor": "",
-"location": "WH 024",
-"startHour": 17,
-"endHour": 20,
-"startMinute": 30,
-"endMinute": 0,
-"days": {
-"monday": false,
-"tuesday": false,
-"wednesday": true,
-"thursday": false,
-"friday": false,
-"saturday": false,
-"sunday": false
-}
-
-},
-{
-"uid": "866e9185-4a29-47ae-a4b0-0423e633c8be",
-"courseType": "",
-"instructor": "",
-"location": "WH 024",
-"startHour": 17,
-"endHour": 20,
-"startMinute": 30,
-"endMinute": 0,
-"days": {
-"monday": false,
-"tuesday": false,
-"wednesday": true,
-"thursday": false,
-"friday": false,
-"saturday": false,
-"sunday": false
-}
-
-},
-{
-"uid": "866e9185-4a29-47ae-a4b0-0423e633c8be",
-"courseType": "",
-"instructor": "",
-"location": "WH 024",
-"startHour": 17,
-"endHour": 20,
-"startMinute": 30,
-"endMinute": 0,
-"days": {
-"monday": false,
-"tuesday": false,
-"wednesday": true,
-"thursday": false,
-"friday": false,
-"saturday": false,
-"sunday": false
-}
-
-},
-{
-"uid": "866e9185-4a29-47ae-a4b0-0423e633c8be",
-"courseType": "",
-"instructor": "",
-"location": "WH 024",
-"startHour": 17,
-"endHour": 20,
-"startMinute": 30,
-"endMinute": 0,
-"days": {
-"monday": false,
-"tuesday": false,
-"wednesday": true,
-"thursday": false,
-"friday": false,
-"saturday": false,
-"sunday": false
-}
-
-},
-{
-"uid": "866e9185-4a29-47ae-a4b0-0423e633c8be",
-"courseType": "",
-"instructor": "",
-"location": "WH 024",
-"startHour": 17,
-"endHour": 20,
-"startMinute": 30,
-"endMinute": 0,
-"days": {
-"monday": false,
-"tuesday": false,
-"wednesday": true,
-"thursday": false,
-"friday": false,
-"saturday": false,
-"sunday": false
-}
-
-},
-{
-"uid": "866e9185-4a29-47ae-a4b0-0423e633c8be",
-"courseType": "",
-"instructor": "",
-"location": "WH 024",
-"startHour": 17,
-"endHour": 20,
-"startMinute": 30,
-"endMinute": 0,
-"days": {
-"monday": false,
-"tuesday": false,
-"wednesday": true,
-"thursday": false,
-"friday": false,
-"saturday": false,
-"sunday": false
-}
-}],
-"backgroundColor": "#3A7ECE"
+"backgroundColor": "#A1380F"
 }  
 ]
 }

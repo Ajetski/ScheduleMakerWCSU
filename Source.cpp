@@ -37,7 +37,6 @@ using std::endl;
 using std::cin;
 using std::string;
 using std::ios;
-using std::set;
 
 
 vector<string> vectorizeString(string line);
@@ -62,10 +61,10 @@ int main() {
 
 	vector<string> output;
 
-	set<string> colors{ "#8DC028", "#2AFFE2", "#A1380F", "#3216EB", "#CC673E", "#53E29A",
-		"#384E32", "#95D711", "#4EB3B1", "#3A7ECE", "#BD4433", "#E16D5C", "#933AB2", "#A78335",
-		"#A78335", "#ED5471", "#6DC81E", "#7DC4FE", "#3C7AA0", "#103D5B"};
-	set<string>::iterator colorIter = colors.begin();
+	vector<string> colors{ "#8DC028", "#2AFFE2", "#A1380F", "#CC673E", "#53E29A",
+		"#95D711", "#4EB3B1", "#103D5B", "#3A7ECE", "#BD4433", "#E16D5C", "#933AB2", "#A78335",
+		"#ED5471", "#6DC81E", "#7DC4FE", "#3C7AA0", "#3216EB", "#384E32", "#A78335" };
+	vector<string>::iterator colorIter = colors.begin();
 
 	string prof;
 	cout << "Please input the name of a professor:\n>";
