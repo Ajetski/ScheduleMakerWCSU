@@ -73,6 +73,12 @@ string timeJsonify(string time) {
 		if (finTime.find("pm") != string::npos && finTime.substr(0, 2).compare("12") != 0) {
 			finHr = std::to_string(12 + stoi(finTime.substr(0, 2)));
 		}
+		if (strtTime.find("am") != string::npos && strtTime.substr(0, 2).compare("12") != 0) {
+			strtHr = std::to_string(12 + stoi(strtTime.substr(0, 2)));
+		}
+		if (finTime.find("am") != string::npos && finTime.substr(0, 2).compare("12") != 0) {
+			finHr = std::to_string(12 + stoi(finTime.substr(0, 2)));
+		}
 
 		meetingTime.append("\"startHour\": " + strtHr +
 			",\n\"endHour\": " + finHr +
