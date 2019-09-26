@@ -10,4 +10,4 @@ An optional prefix ! which negates the pattern; any matching file excluded by a 
 *DESKTOP*
 adam_test.cpp
 *.json
-
+test.csv

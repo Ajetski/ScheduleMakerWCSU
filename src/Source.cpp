@@ -74,10 +74,10 @@ int main(int argc, char* argv[]) {
 	//put the starting chuck fo text into the stringstream
 	stringstream output;
 	output << startJson(prof);
-	//string::size_type size_after_start =  output.str().length();
 
 	//input file
 	ifstream inFile ("./data/Fall2019OpenClose.csv");
+	//ifstream inFile("./data/test.csv");
 
 	//check if file is unopenable
 	if (!inFile.is_open()) {
@@ -93,13 +93,16 @@ int main(int argc, char* argv[]) {
 
 	//top is used to check and see if there are multiple instances of the same class
 	vector<string> top;
+	//first will be true until after the first meeting is added to the output stringstream
+	bool first = true;
+
 	while (getline(inFile, line)) {
 		vector<string> curr = vectorizeString(line);
 
 		//for debugging
-		for (const string& s: curr)
+		/*for (const string& s: curr)
 			cout << "'" << s << "' ";
-		cout << endl;
+		cout << endl;*/
 
 		if (!top.empty()) {
 			if (curr[SUBJECT].empty()) {
@@ -119,6 +122,10 @@ int main(int argc, char* argv[]) {
 				//curr is not a second instance of the same class as top
 				classVec[0].push_back(colors.back());
 				colors.pop_back();
+				if (!first) {
+					output << ",\n";
+				}
+				first = false;
 				output << jsonifyMeeting(classVec, prof);
 				classVec.clear();
 				top.clear();
@@ -132,15 +139,23 @@ int main(int argc, char* argv[]) {
 				classVec.push_back(top);
 				classVec[0].push_back(colors.back());
 				colors.pop_back();
+				if (!first) {
+					output << ",\n";
+				}
+				first = false;
 				output << jsonifyMeeting(classVec, prof);
 				classVec.clear();
 				top.clear();
 			}
 		}
 		else {
-			if (!classVec.empty() && colors.empty()) {
+			if (!classVec.empty() && !colors.empty()) {
 				classVec[0].push_back(colors.back());
 				colors.pop_back();
+				if (!first) {
+					output << ",\n";
+				}
+				first = false;
 				output << jsonifyMeeting(classVec, prof);
 				classVec.clear();
 				top.clear();
@@ -154,10 +169,6 @@ int main(int argc, char* argv[]) {
 			}
 		}
 	}
-
-	//if (size_after_start <= output.str().length()) {
-		
-	//}
 	output << endJson();
 	inFile.close();
 	std::ofstream json; //a file that holds json data

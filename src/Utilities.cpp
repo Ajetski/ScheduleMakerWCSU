@@ -25,7 +25,7 @@ string endJson() {
 	//(7) color
 
 string jsonifyMeeting(vector<vector<string>> data, string prof) {// generates a single meeting block to be added to the schedule
-	if (data[0][4].find("TBA") != string::npos || data[0][4].find("TBA") == string::npos)
+	if (data[0][4].find("TBA") != string::npos)
 		return string("");
 
 	string output("{\n\"uid\": \"79c8fe46-035e-4579-b2d8-5f1c2b96f3a0\",\n\"type\": \"Course\",\n\"title\": \"" + data[0][0] + " " + data[0][1] + "-" + data[0][2] + string("\",\n\"meetingTimes\": [\n"));
@@ -48,7 +48,7 @@ string jsonifyMeeting(vector<vector<string>> data, string prof) {// generates a 
 		output.append(daysJsonify(data[0][3]));
 	}
 
-	output += "}],\n\"backgroundColor\": \"" + data[0][7] + "\"\n},\n";
+	output += "}],\n\"backgroundColor\": \"" + data[0][7] + "\"\n}";
 	return output;
 }
 
