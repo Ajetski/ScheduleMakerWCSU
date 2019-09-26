@@ -5,9 +5,6 @@ using std::string;
 using std::vector;
 
 
-enum CSV_Index {CSV_SUBJECT=3, CSV_COURSE=4, CSV_SECTION=5, CSV_DAYS=8, CSV_TIME=9, CSV_LOCATION=17, CSV_INSTRUCTOR=18};
-enum Vec_Index {SUBJECT = 0, COURSE = 1, SECTION = 2, DAYS = 3, TIME = 4, LOCATION = 5, INSTRUCTOR = 6, COLOR = 7 };
-
 string startJson(string prof) {
 	string title = ("\"Schedule for " + prof +  "\"");
 	return string("{\n\"dataCheck\": \"69761aa6-de4c-4013-b455-eb2a91fb2b76\",\n\"saveVersion\" : 4,\n\"schedules\" : [{\n\"title\": " + title + ",\n\"items\" : [");

@@ -43,7 +43,7 @@ using std::stringstream;
 vector<string> vectorizeString(string line);
 bool isPhysical(vector<string> vec);
 
-int main() {
+int main(int argc, char* argv[]) {
 
 	//get csv vals
 
@@ -60,50 +60,62 @@ int main() {
 	//(6) instructors at index 18
 	//(7) color
 
-	stringstream output;
+	
 
 	vector<string> colors{ "#8DC028", "#2AFFE2", "#A1380F", "#CC673E", "#53E29A",
 		"#95D711", "#4EB3B1", "#103D5B", "#3A7ECE", "#BD4433", "#E16D5C", "#933AB2", "#A78335",
 		"#ED5471", "#6DC81E", "#7DC4FE", "#3C7AA0", "#3216EB", "#384E32", "#A78335" };
 
+	//take in name of professor for which we are making a schedule
 	string prof;
 	cout << "Please input the name of a professor:\n>";
 	getline(cin, prof);
 	
-
-	
+	//put the starting chuck fo text into the stringstream
+	stringstream output;
 	output << startJson(prof);
-	string::size_type size_after_start =  output.str().length();
+	//string::size_type size_after_start =  output.str().length();
 
+	//input file
+	ifstream inFile ("./data/Fall2019OpenClose.csv");
 
-	ifstream inFile;
-	inFile.open("./data/Fall2019OpenClose.csv");
-	//inFile.open("test.csv");
-
+	//check if file is unopenable
 	if (!inFile.is_open()) {
 		cout << "Unable to open file";
 		exit(1); // terminate with error
 	}
 
+	//classVec holds all of the rows that descirbe a given secion. It is then used to jsonify all of the instances of that class
 	vector<vector<string>> classVec;
+
+	//line holds 1 line of the csv file at a time
 	string line;
 
+	//top is used to check and see if there are multiple instances of the same class
 	vector<string> top;
 	while (getline(inFile, line)) {
 		vector<string> curr = vectorizeString(line);
+
+		//for debugging
+		for (const string& s: curr)
+			cout << "'" << s << "' ";
+		cout << endl;
+
 		if (!top.empty()) {
-			if (curr[0].size() < 1) {
+			if (curr[SUBJECT].empty()) {
 				//curr is a second instance of the same class as top
 				if (classVec.empty()) {
-					if (isPhysical(top))classVec.push_back(top);
-					if (isPhysical(curr))classVec.push_back(curr);
+					if (isPhysical(top))
+						classVec.push_back(top);
+					if (isPhysical(curr))
+						classVec.push_back(curr);
 					top.clear();
 				}
-				else {
-					if (isPhysical(curr))classVec.push_back(curr);
-				}
+				else
+					if (isPhysical(curr))
+						classVec.push_back(curr);
 			}
-			else if (colors.empty() && classVec.size() >= 1) {
+			else if (!colors.empty() && !classVec.empty()) {
 				//curr is not a second instance of the same class as top
 				classVec[0].push_back(colors.back());
 				colors.pop_back();
@@ -115,7 +127,7 @@ int main() {
 					classVec.push_back(top);
 				}
 			}
-			else if (colors.empty() && isPhysical(top)) {
+			else if (!colors.empty() && isPhysical(top)) {
 				//curr is not a second instance of the same class as top
 				classVec.push_back(top);
 				classVec[0].push_back(colors.back());
@@ -138,16 +150,14 @@ int main() {
 				classVec.push_back(top);
 			}
 			else {
-				top.clear();
-				curr.clear();
+				top.clear(); curr.clear();
 			}
 		}
 	}
 
-	//output[output.size() - 1] = output[output.size() - 1].substr(0,(size_t) ((int) output[output.size() - 1].size() - 2));
-	if (size_after_start < output.str().length()) {
-
-	}
+	//if (size_after_start <= output.str().length()) {
+		
+	//}
 	output << endJson();
 	inFile.close();
 	std::ofstream json; //a file that holds json data
@@ -160,17 +170,16 @@ int main() {
 
 //returns a vector of data from a string
 vector<string> vectorizeString(string line) {
-	vector<size_t> indexes{ 3, 4, 5, 8, 9, 17, 18 };
+	vector<CSV_Index> indexes{CSV_SUBJECT, CSV_COURSE, CSV_SECTION, CSV_DAYS, CSV_TIME, CSV_LOCATION, CSV_INSTRUCTOR};
 	vector<string> vec;
-	vector<size_t>::iterator curr = indexes.begin();
-	size_t last = 0;
-	size_t found = line.find(",");
-	size_t start_quote = line.find("\"", last);
+	string::size_type last{ 0 };
+	string::size_type found{ line.find(",") };
+	string::size_type start_quote{ line.find("\"", last) };
 	bool reached_end = false;
-	for (size_t i = 0; found != string::npos || !reached_end; i++) {
+	for (string::size_type i{ 0 }; found != string::npos || !reached_end; i++) {
 		if (found == string::npos && last != string::npos) {
 			//handle last cell in a line
-			string temp = line.substr(last, line.size() - last);
+			string temp(line.substr(last, line.size() - last));
 			start_quote = temp.find("\"");
 			if (start_quote == string::npos && line.size() > last) {
 				//there no quotes
@@ -180,11 +189,11 @@ vector<string> vectorizeString(string line) {
 		}
 		else if (start_quote < found) {
 			// in a string
-			size_t end_quote = line.find("\"", start_quote + 1);
+			string::size_type end_quote = line.find("\"", start_quote + 1);
 			string temp = line.substr(start_quote + 1, end_quote - start_quote - 1);
-			if (curr != indexes.end() && i == *curr) {
+			if (!indexes.empty() && i == indexes.front()) {
 				vec.push_back(line.substr(start_quote + 1, end_quote - start_quote - 1));
-				curr++;
+				indexes.erase(indexes.begin());
 			}
 			last = end_quote + 1;
 			start_quote = line.find("\"", end_quote + 1);
@@ -193,9 +202,9 @@ vector<string> vectorizeString(string line) {
 		else {
 			// not in a string
 			string temp = line.substr(last, found - last);
-			if (curr != indexes.end() && i == *curr) {
+			if (!indexes.empty() && i == indexes.front()) {
 				vec.push_back(line.substr(last, found - last));
-				curr++;
+				indexes.erase(indexes.begin());
 			}
 			last = found + 1;
 			found = line.find(",", last);
