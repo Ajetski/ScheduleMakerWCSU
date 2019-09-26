@@ -4,14 +4,13 @@
 using std::string;
 using std::vector;
 
+
+enum CSV_Index {CSV_SUBJECT=3, CSV_COURSE=4, CSV_SECTION=5, CSV_DAYS=8, CSV_TIME=9, CSV_LOCATION=17, CSV_INSTRUCTOR=18};
+enum Vec_Index {SUBJECT = 0, COURSE = 1, SECTION = 2, DAYS = 3, TIME = 4, LOCATION = 5, INSTRUCTOR = 6, COLOR = 7 };
+
 string startJson(string prof) {
-	string title = ("\"" + prof + "'s Schedule" + "\"");
+	string title = ("\"Schedule for " + prof +  "\"");
 	return string("{\n\"dataCheck\": \"69761aa6-de4c-4013-b455-eb2a91fb2b76\",\n\"saveVersion\" : 4,\n\"schedules\" : [{\n\"title\": " + title + ",\n\"items\" : [");
-	/*
-	{
-	  "title": "",
-	  "items": [
-	  */
 }
 
 string endJson() {
@@ -29,17 +28,20 @@ string endJson() {
 	//(7) color
 
 string jsonifyMeeting(vector<vector<string>> data, string prof) {// generates a single meeting block to be added to the schedule
-	if (data[0][4].find("TBA") != string::npos) { return string(""); }
+	if (data[0][4].find("TBA") != string::npos || data[0][4].find("TBA") == string::npos)
+		return string("");
 
 	string output("{\n\"uid\": \"79c8fe46-035e-4579-b2d8-5f1c2b96f3a0\",\n\"type\": \"Course\",\n\"title\": \"" + data[0][0] + " " + data[0][1] + "-" + data[0][2] + string("\",\n\"meetingTimes\": [\n"));
 
 	if (data.size() > 1) {
 		for (size_t iter = 0; iter < data.size(); iter++) {
-			output.append("{\n\"uid\": \"866e9185-4a29-47ae-a4b0-0423e633c8be\",\n\"courseType\": \"\",\n\"instructor\": \"\",\n\"location\": \"" + data[iter][5] + ("\",\n"));
-			output.append(timeJsonify(data[iter][4]));
-			output.append(daysJsonify(data[iter][3]));
-			if (iter < data.size() - 1) {
-				output.append("\n},\n");
+			if (data[iter][4].find("TBA") == string::npos) {
+				output.append("{\n\"uid\": \"866e9185-4a29-47ae-a4b0-0423e633c8be\",\n\"courseType\": \"\",\n\"instructor\": \"\",\n\"location\": \"" + data[iter][5] + ("\",\n"));
+				output.append(timeJsonify(data[iter][4]));
+				output.append(daysJsonify(data[iter][3]));
+				if (iter < data.size() - 1) {
+					output.append("\n},\n");
+				}
 			}
 		}
 	}

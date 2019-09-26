@@ -25,7 +25,7 @@ Edge Cases:
 #include <string>
 #include <sstream>
 #include <vector>
-#include <set>
+#include <sstream>
 #include "Utilities.h"
 
 
@@ -37,6 +37,7 @@ using std::endl;
 using std::cin;
 using std::string;
 using std::ios;
+using std::stringstream;
 
 
 vector<string> vectorizeString(string line);
@@ -59,12 +60,11 @@ int main() {
 	//(6) instructors at index 18
 	//(7) color
 
-	vector<string> output;
+	stringstream output;
 
 	vector<string> colors{ "#8DC028", "#2AFFE2", "#A1380F", "#CC673E", "#53E29A",
 		"#95D711", "#4EB3B1", "#103D5B", "#3A7ECE", "#BD4433", "#E16D5C", "#933AB2", "#A78335",
 		"#ED5471", "#6DC81E", "#7DC4FE", "#3C7AA0", "#3216EB", "#384E32", "#A78335" };
-	vector<string>::iterator colorIter = colors.begin();
 
 	string prof;
 	cout << "Please input the name of a professor:\n>";
@@ -72,11 +72,12 @@ int main() {
 	
 
 	
-	output.push_back(startJson(prof));
+	output << startJson(prof);
+	string::size_type size_after_start =  output.str().length();
 
 
 	ifstream inFile;
-	inFile.open("Fall2019OpenClose.csv");
+	inFile.open("./data/Fall2019OpenClose.csv");
 	//inFile.open("test.csv");
 
 	if (!inFile.is_open()) {
@@ -102,10 +103,11 @@ int main() {
 					if (isPhysical(curr))classVec.push_back(curr);
 				}
 			}
-			else if (colorIter != colors.end() && classVec.size() >= 1) {
-				//curr is not a second instance of the same class as 
-				classVec[0].push_back(*(colorIter++));
-				output.push_back(jsonifyMeeting(classVec, prof));
+			else if (colors.empty() && classVec.size() >= 1) {
+				//curr is not a second instance of the same class as top
+				classVec[0].push_back(colors.back());
+				colors.pop_back();
+				output << jsonifyMeeting(classVec, prof);
 				classVec.clear();
 				top.clear();
 				if (curr[6].find(prof) != string::npos && isPhysical(curr)) {
@@ -113,19 +115,21 @@ int main() {
 					classVec.push_back(top);
 				}
 			}
-			else if (colorIter != colors.end() && isPhysical(top)) {
+			else if (colors.empty() && isPhysical(top)) {
 				//curr is not a second instance of the same class as top
 				classVec.push_back(top);
-				classVec[0].push_back(*(colorIter++));
-				output.push_back(jsonifyMeeting(classVec, prof));
+				classVec[0].push_back(colors.back());
+				colors.pop_back();
+				output << jsonifyMeeting(classVec, prof);
 				classVec.clear();
 				top.clear();
 			}
 		}
 		else {
-			if (!classVec.empty() && colorIter != colors.end()) {
-				classVec[0].push_back(*(colorIter++));
-				output.push_back(jsonifyMeeting(classVec, prof));
+			if (!classVec.empty() && colors.empty()) {
+				classVec[0].push_back(colors.back());
+				colors.pop_back();
+				output << jsonifyMeeting(classVec, prof);
 				classVec.clear();
 				top.clear();
 			}
@@ -140,20 +144,21 @@ int main() {
 		}
 	}
 
-	output[output.size() - 1] = output[output.size() - 1].substr(0,(size_t) ((int) output[output.size() - 1].size() - 2));
-	output.push_back(endJson());
+	//output[output.size() - 1] = output[output.size() - 1].substr(0,(size_t) ((int) output[output.size() - 1].size() - 2));
+	if (size_after_start < output.str().length()) {
+
+	}
+	output << endJson();
 	inFile.close();
 	std::ofstream json; //a file that holds json data
-	json.open("output.csmo");
-	for (vector<string>::iterator i = output.begin(); i != output.end(); i++) {
-		json << *i;
-	}
+	json.open("./output/output.csmo");
+	json << output.rdbuf();
 	json.close();
 	inFile.close();
 }
 
 
-//returns a vecotr of data from a string
+//returns a vector of data from a string
 vector<string> vectorizeString(string line) {
 	vector<size_t> indexes{ 3, 4, 5, 8, 9, 17, 18 };
 	vector<string> vec;
