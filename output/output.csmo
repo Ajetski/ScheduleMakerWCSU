@@ -1,0 +1,88 @@
+{
+"dataCheck": "69761aa6-de4c-4013-b455-eb2a91fb2b76",
+"saveVersion" : 4,
+"schedules" : [{
+"title": "Schedule for Sean Murthy",
+"items" : [{
+"uid": "79c8fe46-035e-4579-b2d8-5f1c2b96f3a0",
+"type": "Course",
+"title": "CS 110-3",
+"meetingTimes": [
+{
+"uid": "866e9185-4a29-47ae-a4b0-0423e633c8be",
+"courseType": "",
+"instructor": "",
+"location": "HI 029",
+"startHour": 12,
+"endHour": 13,
+"startMinute": 30,
+"endMinute": 45,
+"days": {
+"monday": false,
+"tuesday": true,
+"wednesday": false,
+"thursday": false,
+"friday": true,
+"saturday": false,
+"sunday": false
+}
+}],
+"backgroundColor": "#A78335"
+},
+{
+"uid": "79c8fe46-035e-4579-b2d8-5f1c2b96f3a0",
+"type": "Course",
+"title": "CS 140-1",
+"meetingTimes": [
+{
+"uid": "866e9185-4a29-47ae-a4b0-0423e633c8be",
+"courseType": "",
+"instructor": "",
+"location": "HI 029",
+"startHour": 9,
+"endHour": 11,
+"startMinute": 30,
+"endMinute": 10,
+"days": {
+"monday": true,
+"tuesday": false,
+"wednesday": false,
+"thursday": true,
+"friday": false,
+"saturday": false,
+"sunday": false
+}
+}],
+"backgroundColor": "#384E32"
+},
+{
+"uid": "79c8fe46-035e-4579-b2d8-5f1c2b96f3a0",
+"type": "Course",
+"title": "CS 205-1",
+"meetingTimes": [
+{
+"uid": "866e9185-4a29-47ae-a4b0-0423e633c8be",
+"courseType": "",
+"instructor": "",
+"location": "HI 031",
+"startHour": 15,
+"endHour": 17,
+"startMinute": 30,
+"endMinute": 10,
+"days": {
+"monday": true,
+"tuesday": false,
+"wednesday": false,
+"thursday": true,
+"friday": false,
+"saturday": false,
+"sunday": false
+}
+}],
+"backgroundColor": "#3216EB"
+}
+]
+}
+],
+"currentSchedule": 0
+}
