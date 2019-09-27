@@ -23,6 +23,7 @@ Edge Cases:
 #include <iomanip>
 #include <fstream>
 #include <string>
+#include <cstring>
 #include <sstream>
 #include <vector>
 #include <sstream>
@@ -38,6 +39,8 @@ using std::cin;
 using std::string;
 using std::ios;
 using std::stringstream;
+using std::strlen;
+
 
 
 vector<string> vectorizeString(string line);
@@ -60,24 +63,48 @@ int main(int argc, char* argv[]) {
 	//(6) instructors at index 18
 	//(7) color
 
+
+	//important variables that can optionally be taken in via command line args
+	string prof;
+	string outputPath;
+	string inputPath;
+
+	//holds output in the form of json data (which is then read into a file)
+	stringstream output;
+
+	for (int i = 1; i < argc; i++) {
+		if (strcmp(argv[i], "-o") == 0) {
+			outputPath = argv[++i];
+		}
+		else if (strcmp(argv[i], "-p") == 0) {
+			prof = argv[++i];
+		}
+		else if (strcmp(argv[i], "-i") == 0) {
+			inputPath = argv[++i];
+		}
+	}
+
 	
 
 	vector<string> colors{ "#8DC028", "#2AFFE2", "#A1380F", "#CC673E", "#53E29A",
 		"#95D711", "#4EB3B1", "#103D5B", "#3A7ECE", "#BD4433", "#E16D5C", "#933AB2", "#A78335",
 		"#ED5471", "#6DC81E", "#7DC4FE", "#3C7AA0", "#3216EB", "#384E32", "#A78335" };
 
-	//take in name of professor for which we are making a schedule
-	string prof;
-	cout << "Please input the name of a professor:\n>";
-	getline(cin, prof);
+	//take in name of professor for which we are making a schedule if we dont have it in command line args
+	if (prof.empty()) {
+		cout << "Please input the name of a professor:\n>";
+		getline(cin, prof);
+	}
 	
 	//put the starting chuck fo text into the stringstream
-	stringstream output;
 	output << startJson(prof);
 
 	//input file
-	ifstream inFile ("./data/Fall2019OpenClose.csv");
-	//ifstream inFile("./data/test.csv");
+	ifstream inFile;
+	if (inputPath.empty()) 
+		inFile.open("./data/Fall2019OpenClose.csv");
+	else
+		inFile.open("./data/" + inputPath);
 
 	//check if file is unopenable
 	if (!inFile.is_open()) {
@@ -109,12 +136,17 @@ int main(int argc, char* argv[]) {
 				//curr is a second instance of the same class as top
 				if (classVec.empty()) {
 					if (isPhysical(top))
+						//if top is a real class, we should add it to classVec
 						classVec.push_back(top);
 					if (isPhysical(curr))
+						//if curr is a real class, we should add it to calssVec
 						classVec.push_back(curr);
+					//if top is valid, it is now in classVec, and else it is not
+					//we should now clear top, as it is defined outside of this scope and will persist. (curr is defined in this loop)
 					top.clear();
 				}
 				else
+					//classVec is empty and curr is a second instance of the class in top
 					if (isPhysical(curr))
 						classVec.push_back(curr);
 			}
@@ -172,7 +204,10 @@ int main(int argc, char* argv[]) {
 	output << endJson();
 	inFile.close();
 	std::ofstream json; //a file that holds json data
-	json.open("./output/output.csmo");
+	if (outputPath.empty())
+		json.open("./output/output.csmo");
+	else
+		json.open("./output/" + outputPath);
 	json << output.rdbuf();
 	json.close();
 	inFile.close();
