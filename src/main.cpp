@@ -30,8 +30,6 @@ Edge Cases:
 #include "Utilities.h"
 
 
-
-
 using std::ifstream;
 using std::cout;
 using std::endl;
@@ -42,9 +40,9 @@ using std::stringstream;
 using std::strlen;
 
 
-
-vector<string> vectorizeString(string line);
+vector<string> splitRow(string line);
 bool isPhysical(vector<string> vec);
+bool validName(string str);
 
 int main(int argc, char* argv[]) {
 
@@ -72,16 +70,14 @@ int main(int argc, char* argv[]) {
 	//holds output in the form of json data (which is then read into a file)
 	stringstream output;
 
-	for (int i = 1; i < argc; i++) {
-		if (strcmp(argv[i], "-o") == 0) {
-			outputPath = argv[++i];
-		}
-		else if (strcmp(argv[i], "-p") == 0) {
-			prof = argv[++i];
-		}
-		else if (strcmp(argv[i], "-i") == 0) {
-			inputPath = argv[++i];
-		}
+	for (int argNum = 1; argNum < argc; argNum++) {
+		if (strcmp(argv[argNum], "-i") == 0)
+			inputPath = argv[++argNum];
+		else if (strcmp(argv[argNum], "-p") == 0)
+			if(validName(argv[++argNum]))
+				prof = argv[++argNum];
+		else if (strcmp(argv[argNum], "-o") == 0)
+			outputPath = argv[++argNum];
 	}
 
 	
@@ -91,9 +87,19 @@ int main(int argc, char* argv[]) {
 		"#ED5471", "#6DC81E", "#7DC4FE", "#3C7AA0", "#3216EB", "#384E32", "#A78335" };
 
 	//take in name of professor for which we are making a schedule if we dont have it in command line args
-	if (prof.empty()) {
+	while(prof.empty()) {
 		cout << "Please input the name of a professor:\n>";
-		getline(cin, prof);
+		string rawInput;
+		getline(cin, rawInput);
+		if (!cin.good()) {
+			cout << "Invalid Professor Name" << endl;
+			cin.ignore();
+			cin.clear();
+		}
+		else if (!validName(rawInput))
+			cout << "Invalid Professor Name" << endl;
+		else
+			prof = rawInput;
 	}
 	
 	//put the starting chuck fo text into the stringstream
@@ -112,8 +118,8 @@ int main(int argc, char* argv[]) {
 		exit(1); // terminate with error
 	}
 
-	//classVec holds all of the rows that descirbe a given secion. It is then used to jsonify all of the instances of that class
-	vector<vector<string>> classVec;
+	//sectionTable holds all of the rows that descirbe a given secion. It is then used to jsonify all of the instances of that class
+	vector<vector<string>> sectionTable;
 
 	//line holds 1 line of the csv file at a time
 	string line;
@@ -124,7 +130,7 @@ int main(int argc, char* argv[]) {
 	bool first = true;
 
 	while (getline(inFile, line)) {
-		vector<string> curr = vectorizeString(line);
+		vector<string> curr = splitRow(line);
 
 		//for debugging
 		/*for (const string& s: curr)
@@ -134,70 +140,68 @@ int main(int argc, char* argv[]) {
 		if (!top.empty()) {
 			if (curr[SUBJECT].empty()) {
 				//curr is a second instance of the same class as top
-				if (classVec.empty()) {
+				if (sectionTable.empty()) {
 					if (isPhysical(top))
-						//if top is a real class, we should add it to classVec
-						classVec.push_back(top);
+						//if top is a real class, we should add it to sectionTable
+						sectionTable.push_back(top);
 					if (isPhysical(curr))
 						//if curr is a real class, we should add it to calssVec
-						classVec.push_back(curr);
-					//if top is valid, it is now in classVec, and else it is not
+						sectionTable.push_back(curr);
+					//if top is valid, it is now in sectionTable, and else it is not
 					//we should now clear top, as it is defined outside of this scope and will persist. (curr is defined in this loop)
 					top.clear();
 				}
 				else
-					//classVec is empty and curr is a second instance of the class in top
+					//sectionTable is empty and curr is a second instance of the class in top
 					if (isPhysical(curr))
-						classVec.push_back(curr);
+						sectionTable.push_back(curr);
 			}
-			else if (!colors.empty() && !classVec.empty()) {
+			else if (!colors.empty() && !sectionTable.empty()) {
 				//curr is not a second instance of the same class as top
-				classVec[0].push_back(colors.back());
+				sectionTable[0].push_back(colors.back());
 				colors.pop_back();
-				if (!first) {
+				if (!first)
 					output << ",\n";
-				}
 				first = false;
-				output << jsonifyMeeting(classVec, prof);
-				classVec.clear();
+				output << jsonifyMeeting(sectionTable, prof);
+				sectionTable.clear();
 				top.clear();
 				if (curr[6].find(prof) != string::npos && isPhysical(curr)) {
 					top = curr;
-					classVec.push_back(top);
+					sectionTable.push_back(top);
 				}
 			}
 			else if (!colors.empty() && isPhysical(top)) {
 				//curr is not a second instance of the same class as top
-				classVec.push_back(top);
-				classVec[0].push_back(colors.back());
+				sectionTable.push_back(top);
+				sectionTable[0].push_back(colors.back());
 				colors.pop_back();
-				if (!first) {
+				if (!first)
 					output << ",\n";
-				}
 				first = false;
-				output << jsonifyMeeting(classVec, prof);
-				classVec.clear();
+				output << jsonifyMeeting(sectionTable, prof);
+				sectionTable.clear();
 				top.clear();
 			}
 		}
 		else {
-			if (!classVec.empty() && !colors.empty()) {
-				classVec[0].push_back(colors.back());
+			if (!sectionTable.empty() && !colors.empty()) {
+				sectionTable[0].push_back(colors.back());
 				colors.pop_back();
-				if (!first) {
+				if (!first)
 					output << ",\n";
-				}
 				first = false;
-				output << jsonifyMeeting(classVec, prof);
-				classVec.clear();
+				output << jsonifyMeeting(sectionTable, prof);
+				sectionTable.clear();
 				top.clear();
 			}
 			if (curr[6].find(prof) != string::npos && isPhysical(curr)) {
 				top = curr;
-				classVec.push_back(top);
+				sectionTable.push_back(top);
 			}
 			else {
-				top.clear(); curr.clear();
+				top.clear(); 
+				curr.clear();
 			}
 		}
 	}
@@ -215,7 +219,7 @@ int main(int argc, char* argv[]) {
 
 
 //returns a vector of data from a string
-vector<string> vectorizeString(string line) {
+vector<string> splitRow(string line) {
 	vector<CSV_Index> indexes{CSV_SUBJECT, CSV_COURSE, CSV_SECTION, CSV_DAYS, CSV_TIME, CSV_LOCATION, CSV_INSTRUCTOR};
 	vector<string> vec;
 	string::size_type last{ 0 };
@@ -227,10 +231,9 @@ vector<string> vectorizeString(string line) {
 			//handle last cell in a line
 			string temp(line.substr(last, line.size() - last));
 			start_quote = temp.find("\"");
-			if (start_quote == string::npos && line.size() > last) {
+			if (start_quote == string::npos && line.size() > last)
 				//there no quotes
 				vec.push_back(temp);
-			}
 			reached_end = true;
 		}
 		else if (start_quote < found) {
@@ -262,8 +265,18 @@ vector<string> vectorizeString(string line) {
 
 //returns a bool of if the locaiton string is not "ONLINE" or "HYBRID"
 bool isPhysical(vector<string> vec) {
-	if (vec[5].find("ONLINE") == string::npos && vec[5].find("HYBRID") == string::npos) {
+	if (vec[5].find("ONLINE") == string::npos && vec[5].find("HYBRID") == string::npos) 
 		return true;
-	}
 	return false;
+}
+
+//returns a bool expression for if a string is a valid name
+bool validName(string str) {
+	bool validFlag=true;
+	if (str.length() == 0)
+		validFlag=false;
+	for (char chr : str)
+		if ((chr < 'A' || chr > 'Z') && (chr < 'a' || chr > 'z') && (chr != '.') && (chr != ' ') && (chr != '-'))
+			validFlag = false;
+	return validFlag;
 }
