@@ -63,9 +63,9 @@ int main(int argc, char* argv[]) {
 
 
 	//important variables that can optionally be taken in via command line args
+	string inputPath("");
 	string prof;
 	string outputPath;
-	string inputPath;
 
 	//holds output in the form of json data (which is then read into a file)
 	stringstream output;
@@ -107,16 +107,9 @@ int main(int argc, char* argv[]) {
 
 	//input file
 	ifstream inFile;
-	if (inputPath.empty()) 
-		inFile.open("./data/Fall2019OpenClose.csv");
-	else
-		inFile.open("./data/" + inputPath);
+	if (inputPath.empty())
+		inputPath = "./data/fall2019.csv";
 
-	//check if file is unopenable
-	if (!inFile.is_open()) {
-		cout << "Unable to open file";
-		exit(1); // terminate with error
-	}
 
 	//sectionTable holds all of the rows that descirbe a given secion. It is then used to jsonify all of the instances of that class
 	vector<vector<string>> sectionTable;
@@ -128,6 +121,14 @@ int main(int argc, char* argv[]) {
 	vector<string> top;
 	//first will be true until after the first meeting is added to the output stringstream
 	bool first = true;
+
+	inFile.open(inputPath);
+
+	//check if file is unopenable
+	if (!inFile.is_open()) {
+		cout << "Unable to open file";
+		return 1; // terminate with error
+	}
 
 	while (getline(inFile, line)) {
 		vector<string> curr = splitRow(line);
@@ -209,9 +210,9 @@ int main(int argc, char* argv[]) {
 	inFile.close();
 	std::ofstream json; //a file that holds json data
 	if (outputPath.empty())
-		json.open("./output/output.csmo");
+		json.open("./output/" + prof + ".csmo");
 	else
-		json.open("./output/" + outputPath);
+		json.open(outputPath);
 	json << output.rdbuf();
 	json.close();
 	inFile.close();
