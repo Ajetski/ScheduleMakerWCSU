@@ -63,7 +63,7 @@ int main(int argc, char* argv[]) {
 
 
 	//important variables that can optionally be taken in via command line args
-	string inputPath("");
+	string inputPath;
 	string prof;
 	string outputPath;
 
