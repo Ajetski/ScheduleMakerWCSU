@@ -31,6 +31,7 @@ Edge Cases:
 
 
 using std::ifstream;
+using std::ofstream;
 using std::cout;
 using std::endl;
 using std::cin;
@@ -43,6 +44,7 @@ using std::strlen;
 vector<string> splitRow(string line);
 bool isPhysical(vector<string> vec);
 bool validName(string str);
+void parseData(ifstream& inFile, ofstream& output, string& prof);
 
 int main(int argc, char* argv[]) {
 
@@ -68,7 +70,7 @@ int main(int argc, char* argv[]) {
 	string outputPath;
 
 	//holds output in the form of json data (which is then read into a file)
-	stringstream output;
+	ofstream output;
 
 	for (int argNum = 1; argNum < argc; argNum++) {
 		if (strcmp(argv[argNum], "-i") == 0)
@@ -81,10 +83,6 @@ int main(int argc, char* argv[]) {
 	}
 
 	
-
-	vector<string> colors{ "#8DC028", "#2AFFE2", "#A1380F", "#CC673E", "#53E29A",
-		"#95D711", "#4EB3B1", "#103D5B", "#3A7ECE", "#BD4433", "#E16D5C", "#933AB2", "#A78335",
-		"#ED5471", "#6DC81E", "#7DC4FE", "#3C7AA0", "#3216EB", "#384E32", "#A78335" };
 
 	//take in name of professor for which we are making a schedule if we dont have it in command line args
 	while(prof.empty()) {
@@ -102,14 +100,52 @@ int main(int argc, char* argv[]) {
 			prof = rawInput;
 	}
 	
-	//put the starting chuck fo text into the stringstream
-	output << startJson(prof);
 
 	//input file
 	ifstream inFile;
 	if (inputPath.empty())
 		inputPath = "./data/fall2019.csv";
 
+	inFile.open(inputPath);
+
+	//check if file is unopenable
+	if (!inFile.is_open()) {
+		cout << "Unable to open file";
+		return 1; // terminate with error
+	}
+
+	//for debugging/providing more data to user
+	cout << "Input: '" << inputPath << "'\n";
+
+	if (outputPath.empty())
+		outputPath = "./output/" + prof + ".csmo";
+
+	output.open(outputPath);
+
+	if (!output.is_open()) {
+		cout << "Unable to open file";
+		return 1; // terminate with error
+	}
+
+	//for debugging/providing more data to user
+	cout << "Output: '" << outputPath << "'\n";
+
+
+	//put the starting chuck fo text into the output
+	output << startJson(prof);
+
+
+	parseData(inFile, output, prof);
+
+	output << endJson();
+	output.close();
+	inFile.close();
+}
+
+void parseData(ifstream& inFile, ofstream& output, string& prof) {
+	vector<string> colors{ "#8DC028", "#2AFFE2", "#A1380F", "#CC673E", "#53E29A",
+		"#95D711", "#4EB3B1", "#103D5B", "#3A7ECE", "#BD4433", "#E16D5C", "#933AB2", "#A78335",
+		"#ED5471", "#6DC81E", "#7DC4FE", "#3C7AA0", "#3216EB", "#384E32", "#A78335" };
 
 	//sectionTable holds all of the rows that descirbe a given secion. It is then used to jsonify all of the instances of that class
 	vector<vector<string>> sectionTable;
@@ -122,13 +158,6 @@ int main(int argc, char* argv[]) {
 	//first will be true until after the first meeting is added to the output stringstream
 	bool first = true;
 
-	inFile.open(inputPath);
-
-	//check if file is unopenable
-	if (!inFile.is_open()) {
-		cout << "Unable to open file";
-		return 1; // terminate with error
-	}
 
 	while (getline(inFile, line)) {
 		vector<string> curr = splitRow(line);
@@ -201,21 +230,11 @@ int main(int argc, char* argv[]) {
 				sectionTable.push_back(top);
 			}
 			else {
-				top.clear(); 
+				top.clear();
 				curr.clear();
 			}
 		}
 	}
-	output << endJson();
-	inFile.close();
-	std::ofstream json; //a file that holds json data
-	if (outputPath.empty())
-		json.open("./output/" + prof + ".csmo");
-	else
-		json.open(outputPath);
-	json << output.rdbuf();
-	json.close();
-	inFile.close();
 }
 
 
