@@ -5,5 +5,5 @@ A schedule maker that takes in data from OpenClose and outputs a schedule of a g
 Structure: ScheduleMakerWCSU [-option] [optionArgument]
 Options:
 * -i NameOfInputFile.csv
-* -o NameOfOutputFile.csmo
 * -p "Professor's Name"
+* -o NameOfOutputFile.csmo
