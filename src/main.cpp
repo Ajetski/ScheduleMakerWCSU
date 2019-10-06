@@ -61,7 +61,7 @@ int main(int argc, char* argv[]) {
 			inputPath = argv[++argNum];
 		else if (strcmp(argv[argNum], "-p") == 0)
 			if(validName(argv[++argNum]))
-				prof = argv[++argNum];
+				prof = argv[argNum];
 		else if (strcmp(argv[argNum], "-o") == 0)
 			outputPath = argv[++argNum];
 	}
