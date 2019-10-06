@@ -13,7 +13,6 @@ using std::cin;
 using std::string;
 using std::ios;
 using std::stringstream;
-using std::strlen;
 
 string startJson(string prof);
 string endJson();
