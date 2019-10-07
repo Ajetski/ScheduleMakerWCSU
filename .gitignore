@@ -11,3 +11,4 @@ An optional prefix ! which negates the pattern; any matching file excluded by a 
 adam_test.cpp
 *.json
 test.csv
+/Release/*

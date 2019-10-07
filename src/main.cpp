@@ -57,11 +57,12 @@ int main(int argc, char* argv[]) {
 	ofstream output;
 
 	for (int argNum = 1; argNum < argc; argNum++) {
-		if (strcmp(argv[argNum], "-i") == 0)
+		if (strcmp(argv[argNum], "-i") == 0) 
 			inputPath = argv[++argNum];
-		else if (strcmp(argv[argNum], "-p") == 0)
-			if(validName(argv[++argNum]))
+		else if (strcmp(argv[argNum], "-p") == 0) {
+			if (validName(argv[++argNum]))
 				prof = argv[argNum];
+		}
 		else if (strcmp(argv[argNum], "-o") == 0)
 			outputPath = argv[++argNum];
 	}
@@ -92,27 +93,29 @@ int main(int argc, char* argv[]) {
 
 	inFile.open(inputPath);
 
+	//for debugging/providing more data to user
+	cout << "Input: '" << inputPath << "'\n";
+
 	//check if file is unopenable
 	if (!inFile.is_open()) {
 		cout << "Unable to open file";
 		return 1; // terminate with error
 	}
 
-	//for debugging/providing more data to user
-	cout << "Input: '" << inputPath << "'\n";
-
 	if (outputPath.empty())
 		outputPath = "./output/" + prof + ".csmo";
 
 	output.open(outputPath);
+
+	//for debugging/providing more data to user
+	cout << "Output: '" << outputPath << "'\n";
 
 	if (!output.is_open()) {
 		cout << "Unable to open file";
 		return 1; // terminate with error
 	}
 
-	//for debugging/providing more data to user
-	cout << "Output: '" << outputPath << "'\n";
+	
 
 
 	//put the starting chuck fo text into the output
