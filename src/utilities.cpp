@@ -22,7 +22,7 @@ string endJson() {
 string jsonifyMeeting(vector<vector<string>> data, string prof) {// generates a single meeting block to be added to the schedule
 	if (data[0][4].find("TBA") != string::npos)
 		return string("");
-	if (stoi(data[0][2]) < 10) {
+	if (data[0][2].size() < 2) {
 		data[0][2] = "0" + data[0][2];
 	}
 	string output("{\n\"uid\": \"79c8fe46-035e-4579-b2d8-5f1c2b96f3a0\",\n\"type\": \"Course\",\n\"title\": \"" + data[0][0] + " " + data[0][1] + "-" + data[0][2] + string("\",\n\"meetingTimes\": [\n"));

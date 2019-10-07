@@ -53,6 +53,8 @@ int main(int argc, char* argv[]) {
 	string prof;
 	string outputPath;
 
+	//input file
+	ifstream inFile;
 	//holds output in the form of json data (which is then read into a file)
 	ofstream output;
 
@@ -67,10 +69,8 @@ int main(int argc, char* argv[]) {
 			outputPath = argv[++argNum];
 	}
 
-	
-
 	//take in name of professor for which we are making a schedule if we dont have it in command line args
-	while(prof.empty()) {
+	while (prof.empty()) {
 		cout << "Please input the name of a professor:\n>";
 		string rawInput;
 		getline(cin, rawInput);
@@ -84,10 +84,8 @@ int main(int argc, char* argv[]) {
 		else
 			prof = rawInput;
 	}
-	
 
-	//input file
-	ifstream inFile;
+
 	if (inputPath.empty())
 		inputPath = "./data/fall2019.csv";
 
@@ -102,6 +100,9 @@ int main(int argc, char* argv[]) {
 		return 1; // terminate with error
 	}
 
+	cout << "Prof: '" << prof << "'\n";
+
+	//output file
 	if (outputPath.empty())
 		outputPath = "./output/" + prof + ".csmo";
 
