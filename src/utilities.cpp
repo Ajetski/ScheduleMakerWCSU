@@ -240,7 +240,7 @@ vector<string> splitRow(string line) {
 			// in a string
 			string::size_type end_quote = line.find("\"", start_quote + 1);
 			string temp = line.substr(start_quote + 1, end_quote - start_quote - 1);
-			if (!indexes.empty() && i == indexes.front()) {
+			if (!indexes.empty() && i == (unsigned int) indexes.front()) {
 				vec.push_back(line.substr(start_quote + 1, end_quote - start_quote - 1));
 				indexes.erase(indexes.begin());
 			}
@@ -251,7 +251,7 @@ vector<string> splitRow(string line) {
 		else {
 			// not in a string
 			string temp = line.substr(last, found - last);
-			if (!indexes.empty() && i == indexes.front()) {
+			if (!indexes.empty() && i == (unsigned int) indexes.front()) {
 				vec.push_back(line.substr(last, found - last));
 				indexes.erase(indexes.begin());
 			}
